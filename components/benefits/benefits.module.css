@@ -62,7 +62,7 @@
   width: 0.55rem;
   height: 0.55rem;
   flex: 0 0 auto;
-  background: currentColor;
+  background: #0759c9;
   content: "";
 }
 
@@ -101,7 +101,7 @@
   width: 0.45rem;
   height: 0.45rem;
   margin-right: 0.45rem;
-  background: var(--ink);
+  background: #0759c9;
   content: "";
 }
 
@@ -135,7 +135,7 @@
   display: grid;
   width: 2.35rem;
   height: 2.35rem;
-  border: 1px solid rgb(244 243 238 / 55%);
+  border: 1px solid #0759c9;
   color: var(--ink);
   font-size: 0.62rem;
   place-items: center;
@@ -165,7 +165,7 @@
   z-index: 2;
   display: grid;
   gap: 0.25rem;
-  color: rgb(244 243 238 / 67%);
+  color: #0759c9;
   font-size: clamp(0.56rem, 0.62vw, 0.7rem);
 }
 

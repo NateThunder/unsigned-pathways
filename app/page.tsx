@@ -4,7 +4,7 @@ import { BenefitsSection } from "../components/benefits/BenefitsSection";
 import { DesktopNavigation } from "../components/DesktopNavigation";
 import { Footer } from "../components/Footer";
 import { MobileNavigation } from "../components/MobileNavigation";
-import logo from "../public/photos/flat logo.png";
+import logo from "../public/photos/flat logo with blue.png";
 import styles from "./page.module.css";
 
 export default function Home() {

@@ -40,7 +40,7 @@ export function Footer() {
             />
             <button className={styles.button} type="submit">
               <span>Sign up</span>
-              <span className={styles.arrow} aria-hidden="true">→</span>
+              <span className={styles.arrow} aria-hidden="true">&rarr;</span>
             </button>
           </div>
           <label className={styles.consent}>
@@ -48,6 +48,37 @@ export function Footer() {
             <span>I want email updates and understand I can unsubscribe at any time.</span>
           </label>
         </form>
+      </div>
+
+      <div className={styles.companyDetails}>
+        <section className={styles.companyBlock} aria-labelledby="company-heading">
+          <h3 className={styles.detailHeading} id="company-heading">
+            Unsigned Pathway C.I.C.
+          </h3>
+          <p>
+            Community Interest Company
+            <br />
+            Registered in Scotland
+            <br />
+            No: SC887043
+          </p>
+        </section>
+
+        <section className={styles.companyBlock} aria-labelledby="purpose-heading">
+          <h3 className={styles.detailHeading} id="purpose-heading">Built for</h3>
+          <p>
+            Real opportunities for artists and
+            <br className={styles.desktopBreak} /> young people across Scotland &amp; UK.
+          </p>
+        </section>
+      </div>
+
+      <div className={styles.utilityBar}>
+        <p>&copy; 2026 Unsigned Pathway</p>
+        <p>SC887043</p>
+        <a href="#home">
+          Back to top <span aria-hidden="true">&uarr;</span>
+        </a>
       </div>
     </footer>
   );
