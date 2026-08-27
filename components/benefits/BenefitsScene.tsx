@@ -30,7 +30,7 @@ function SynthModel({ motionAllowed }: SynthModelProps) {
 
         object.material = materials.map(() => {
           return new THREE.MeshToonMaterial({
-            color: "#d52d28",
+            color: "#0759c9",
           });
         });
         if (object.material.length === 1) object.material = object.material[0];
