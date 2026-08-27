@@ -1,0 +1,213 @@
+.hero {
+  position: relative;
+  display: grid;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  place-items: center;
+  background: #090909;
+}
+
+.heroVideo,
+.videoShade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.heroVideo {
+  z-index: 0;
+  object-fit: cover;
+}
+
+.logo {
+  position: fixed;
+  top: clamp(1.25rem, 3vw, 2.5rem);
+  left: clamp(1.25rem, 3vw, 2.5rem);
+  z-index: 10;
+  width: clamp(2rem, 3.75vw, 3.25rem);
+  height: auto;
+  mix-blend-mode: difference;
+  animation: logo-reveal 700ms 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 220ms ease;
+}
+
+.logo:hover {
+  transform: translateY(-2px);
+}
+
+.navigation {
+  position: fixed;
+  top: clamp(1.75rem, 3.5vw, 3rem);
+  right: clamp(1.25rem, 3vw, 2.5rem);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.25vw, 2.5rem);
+  color: rgb(233 234 228);
+  mix-blend-mode: difference;
+  white-space: nowrap;
+}
+
+.navigation a {
+  display: inline-flex;
+  align-items: baseline;
+  color: inherit;
+  font-family: "Recursive Variable", Arial, Helvetica, sans-serif;
+  font-size: clamp(0.7rem, 0.85vw, 0.9rem);
+  letter-spacing: 0.025em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.navigation a:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 0.45rem;
+}
+
+.scrambleLabel {
+  position: relative;
+  display: inline-grid;
+}
+
+.scrambleLabelSizer {
+  visibility: hidden;
+}
+
+.scrambleLabelText {
+  position: absolute;
+  inset: 0;
+}
+
+.navArrow {
+  display: inline-block;
+  margin-left: 0.12rem;
+  font-size: 0.9em;
+  transform: translateY(-0.08em);
+}
+
+.mobileNavigation {
+  display: none;
+}
+
+.videoShade {
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgb(0 0 0 / 20%), rgb(0 0 0 / 42%)),
+    radial-gradient(circle at center, transparent 25%, rgb(0 0 0 / 28%) 100%);
+}
+
+@keyframes logo-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .navigation {
+    display: none;
+  }
+
+  .mobileNavigation {
+    display: block;
+  }
+
+  .menuButton {
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 0px) + 1.5rem);
+    right: 1.25rem;
+    z-index: 30;
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0.78rem 0.62rem;
+    border: 0;
+    background: transparent;
+    color: #e9eae4;
+    cursor: pointer;
+    mix-blend-mode: difference;
+  }
+
+  .menuButtonLine {
+    display: block;
+    width: 100%;
+    height: 1px;
+    margin: auto;
+    background: currentColor;
+    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .menuButton[aria-expanded="true"] .menuButtonLine:first-child {
+    transform: translateY(0.3rem) rotate(45deg);
+  }
+
+  .menuButton[aria-expanded="true"] .menuButtonLine:last-child {
+    transform: translateY(-0.3rem) rotate(-45deg);
+  }
+
+  .mobileMenu {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: grid;
+    align-items: center;
+    padding: 6rem 1.5rem 2rem;
+    background: #0a0a0a;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-1rem);
+    transition:
+      opacity 280ms ease,
+      transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .mobileMenuOpen {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .mobileMenu nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mobileMenu a {
+    color: #e9eae4;
+    font-family: "Recursive Variable", Arial, Helvetica, sans-serif;
+    font-size: clamp(1.8rem, 9vw, 3.5rem);
+    font-variation-settings: "MONO" 0, "CASL" 0, "wght" 560, "slnt" 0, "CRSV" 0.5;
+    line-height: 1.2;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .mobileMenu a:focus-visible,
+  .menuButton:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 0.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroVideo {
+    display: none;
+  }
+
+  .logo {
+    animation: none;
+  }
+
+  .mobileMenu,
+  .menuButtonLine {
+    transition: none;
+  }
+}

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "@fontsource-variable/recursive/full.css";
 
 :root {
   --background: #ffffff;
@@ -20,7 +21,18 @@
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
