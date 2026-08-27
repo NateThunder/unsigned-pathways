@@ -48,7 +48,7 @@ function ChainScene({
     return new THREE.Line(
       geometry,
       new THREE.LineDashedMaterial({
-        color: "#0b0b0a",
+        color: "#0759c9",
         dashSize: 0.025,
         gapSize: 0.05,
       }),

@@ -1,4 +1,5 @@
 import { IBM_Plex_Mono } from "next/font/google";
+import { AboutScrambleLink } from "./AboutScrambleLink";
 import { PathwayChain } from "./PathwayChain";
 import styles from "./about.module.css";
 
@@ -60,7 +61,7 @@ export function AboutSection() {
               <br />
               One artist-led
               <br />
-              ecosystem.
+              ecosystem<span className={styles.blueFullStop}>.</span>
             </h2>
           </div>
 
@@ -79,9 +80,7 @@ export function AboutSection() {
               Four pathways. One ecosystem. Designed to meet you where you are,
               and take you further.
             </p>
-            <a className={styles.aboutLink} href="#">
-              More about us <span aria-hidden="true">↳</span>
-            </a>
+            <AboutScrambleLink />
           </div>
         </div>
 
