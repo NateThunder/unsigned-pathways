@@ -2,18 +2,19 @@
 
 import { gsap } from "gsap";
 import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
+import Link from "next/link";
 import { useRef } from "react";
 import styles from "../app/page.module.css";
 
 gsap.registerPlugin(ScrambleTextPlugin);
 
 const links = [
-  ["Home", "#home"],
-  ["About", "#about"],
-  ["Artists", "#artists", true],
-  ["Access Programme", "#access-programme"],
-  ["Partnership", "#partnership"],
-  ["More", "#more", true],
+  ["Home", "/#home"],
+  ["About", "/about"],
+  ["Artists", "/#artists", true],
+  ["Access Programme", "/#access-programme"],
+  ["Partnership", "/#partnership"],
+  ["More", "/#more", true],
 ] as const;
 
 function ScrambleLink({ label, href, hasArrow = false }: {
@@ -48,13 +49,13 @@ function ScrambleLink({ label, href, hasArrow = false }: {
   };
 
   return (
-    <a href={href} aria-label={label} onMouseEnter={scramble} onMouseLeave={reset} onFocus={scramble} onBlur={reset}>
+    <Link href={href} aria-label={label} onMouseEnter={scramble} onMouseLeave={reset} onFocus={scramble} onBlur={reset}>
       <span className={styles.scrambleLabel} aria-hidden="true">
         <span className={styles.scrambleLabelSizer}>{label}</span>
         <span ref={labelRef} className={styles.scrambleLabelText}>{label}</span>
       </span>
       {hasArrow && <span className={styles.navArrow} aria-hidden="true">⌄</span>}
-    </a>
+    </Link>
   );
 }
 

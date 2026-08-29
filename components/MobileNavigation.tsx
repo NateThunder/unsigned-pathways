@@ -1,15 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import styles from "../app/page.module.css";
 
 const links = [
-  ["Home", "#home"],
-  ["About", "#about"],
-  ["Artists", "#artists"],
-  ["Access Programme", "#access-programme"],
-  ["Partnership", "#partnership"],
-  ["More", "#more"],
+  ["Home", "/#home"],
+  ["About", "/about"],
+  ["Artists", "/#artists"],
+  ["Access Programme", "/#access-programme"],
+  ["Partnership", "/#partnership"],
+  ["More", "/#more"],
 ] as const;
 
 export function MobileNavigation() {
@@ -52,9 +53,9 @@ export function MobileNavigation() {
       >
         <nav aria-label="Mobile navigation">
           {links.map(([label, href]) => (
-            <a key={href} href={href} onClick={() => setIsOpen(false)} tabIndex={isOpen ? 0 : -1}>
+            <Link key={href} href={href} onClick={() => setIsOpen(false)} tabIndex={isOpen ? 0 : -1}>
               {label}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>

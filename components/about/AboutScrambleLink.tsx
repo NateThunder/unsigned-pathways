@@ -39,7 +39,7 @@ export function AboutScrambleLink() {
   return (
     <a
       className={styles.aboutLink}
-      href="#"
+      href="/about"
       aria-label={label}
       onMouseEnter={scramble}
       onMouseLeave={reset}

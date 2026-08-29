@@ -7,6 +7,7 @@ import type {
   PointerEvent as ReactPointerEvent,
 } from "react";
 import * as THREE from "three";
+import { useSceneVisibility } from "../three/useSceneVisibility";
 import styles from "./about.module.css";
 
 type PointerState = {
@@ -176,11 +177,16 @@ function ChainScene({
   );
 }
 
-export function PathwayChain() {
+type PathwayChainProps = {
+  className?: string;
+};
+
+export function PathwayChain({ className }: PathwayChainProps = {}) {
   const pointer = useRef<PointerState>({ x: 0, y: 0, active: false });
   const scrollEnergy = useRef(0);
   const previousScroll = useRef(0);
   const [motionAllowed, setMotionAllowed] = useState(true);
+  const { containerRef, shouldMount, isActive } = useSceneVisibility();
 
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -226,7 +232,8 @@ export function PathwayChain() {
 
   return (
     <div
-      className={styles.route}
+      ref={containerRef}
+      className={`${styles.route}${className ? ` ${className}` : ""}`}
       onPointerMove={handlePointerMove}
       onPointerEnter={() => {
         pointer.current.active = true;
@@ -236,22 +243,25 @@ export function PathwayChain() {
       }}
       aria-hidden="true"
     >
-      <Canvas
-        orthographic
-        camera={{ position: [0, 0, 10], zoom: 100 }}
-        dpr={[1, 1.5]}
-        gl={{
-          alpha: true,
-          antialias: true,
-          powerPreference: "high-performance",
-        }}
-      >
-        <ChainScene
-          pointer={pointer}
-          scrollEnergyRef={scrollEnergy}
-          motionAllowed={motionAllowed}
-        />
-      </Canvas>
+      {shouldMount && (
+        <Canvas
+          orthographic
+          frameloop={isActive ? "always" : "never"}
+          camera={{ position: [0, 0, 10], zoom: 100 }}
+          dpr={[1, 1.5]}
+          gl={{
+            alpha: true,
+            antialias: true,
+            powerPreference: "high-performance",
+          }}
+        >
+          <ChainScene
+            pointer={pointer}
+            scrollEnergyRef={scrollEnergy}
+            motionAllowed={motionAllowed}
+          />
+        </Canvas>
+      )}
     </div>
   );
 }
