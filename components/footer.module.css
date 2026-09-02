@@ -66,7 +66,7 @@
 .subscribeRow {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  border: 1px solid #aaa9a4;
+  border: 1px solid #080808;
   transition: border-color 180ms ease;
 }
 
@@ -101,7 +101,7 @@
   justify-content: space-between;
   padding: 0.9rem 1.1rem;
   border: 0;
-  border-left: 1px solid #aaa9a4;
+  border-left: 1px solid #080808;
   font-size: 0.58rem;
   font-variation-settings: "MONO" 1, "CASL" 0, "wght" 560;
   letter-spacing: 0.2em;
@@ -276,7 +276,7 @@
   }
 
   .input {
-    border-bottom: 1px solid #aaa9a4;
+    border-bottom: 1px solid #080808;
   }
 
   .button {

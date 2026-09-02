@@ -1,14 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { IBM_Plex_Mono } from "next/font/google";
+import { EditorialModelScene } from "../../components/three/EditorialModelScene";
 import styles from "./page.module.css";
-
-const mono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-  variable: "--font-festival-mono",
-});
 
 export const metadata: Metadata = {
   title: "UP Festival | Unsigned Pathway",
@@ -41,22 +34,14 @@ function Spark() {
 
 export default function UpFestivalPage() {
   return (
-    <div className={`${styles.page} ${mono.variable}`}>
+    <div className={styles.page}>
       <main className={styles.main} id="home">
-        <section className={styles.poster} id="festival" aria-labelledby="festival-title">
+        <section className={styles.poster} id="festival" aria-label="UP Festival">
           <div className={styles.intro}>
             <p className={styles.eyebrow}>
               <span aria-hidden="true" />
               UP Festival
             </p>
-
-            <h1 id="festival-title">
-              Music<span>.</span>
-              <br />
-              Community<span>.</span>
-              <br />
-              Future<span>.</span>
-            </h1>
 
             <div className={styles.introRule} aria-hidden="true" />
             <p className={styles.summary}>
@@ -76,7 +61,14 @@ export default function UpFestivalPage() {
             </div>
           </div>
 
-          <div className={styles.emptyStage} aria-label="Festival artwork coming soon" />
+          <div className={styles.emptyStage} aria-label="Three-dimensional festival stage">
+            <EditorialModelScene
+              className={styles.stageCanvas}
+              modelPath="/3d/stage_optimized.glb"
+              rotation={[-0.24, -0.5, 0.02]}
+              targetSize={2.6}
+            />
+          </div>
 
           <aside className={styles.details} aria-label="Festival details">
             <dl>

@@ -1,15 +1,7 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono } from "next/font/google";
 import { Footer } from "../../components/Footer";
 import { PartnershipForm } from "./PartnershipForm";
 import styles from "./page.module.css";
-
-const mono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-  variable: "--font-partnership-mono",
-});
 
 export const metadata: Metadata = {
   title: "Partnership Programme | Unsigned Pathway",
@@ -91,43 +83,12 @@ function OpportunityIcon({ type }: { type: (typeof opportunities)[number]["icon"
 
 export default function PartnershipPage() {
   return (
-    <div className={`${styles.page} ${mono.variable}`}>
+    <div className={styles.page}>
       <main id="home">
-        <section className={styles.hero} aria-labelledby="partnership-title">
-          <div className={styles.heroCopy}>
-            <SectionLabel>Partnership programme</SectionLabel>
-            <h1 id="partnership-title">
-              Stronger<br />
-              together.<br />
-              Greater<br />
-              impact<span>.</span>
-            </h1>
-            <p className={styles.heroIntro}>
-              We work with organisations, businesses and funders who believe in
-              talent, community and opportunity.
-            </p>
-            <div className={styles.heroActions}>
-              <a className={styles.primaryAction} href="#opportunities">
-                Explore partnership <span aria-hidden="true">&#8599;</span>
-              </a>
-              <a className={styles.secondaryAction} href="#contact">
-                Get in touch <span aria-hidden="true">&#8595;</span>
-              </a>
-            </div>
-          </div>
-
-          <dl className={styles.heroFacts}>
-            <div><dt>Collaboration</dt><dd>On</dd></div>
-            <div><dt>Impact</dt><dd>Real</dd></div>
-            <div><dt>Community</dt><dd>Active</dd></div>
-          </dl>
-          <PageMarker>01</PageMarker>
-        </section>
-
         <section className={styles.reasons} aria-labelledby="reasons-title">
           <div className={styles.sectionHeading}>
             <SectionLabel>Why partner</SectionLabel>
-            <h2 id="reasons-title">Partner for<br />change that<br />lasts<span>.</span></h2>
+            <h2 id="reasons-title">Partner for<br />change that<br />lasts</h2>
           </div>
           <div className={styles.reasonGrid}>
             {reasons.map((reason, index) => (
@@ -142,13 +103,13 @@ export default function PartnershipPage() {
               </article>
             ))}
           </div>
-          <PageMarker>02</PageMarker>
+          <PageMarker>01</PageMarker>
         </section>
 
         <section className={styles.opportunities} id="opportunities" aria-labelledby="opportunities-title">
           <div className={styles.sectionHeading}>
             <SectionLabel>Partnership opportunities</SectionLabel>
-            <h2 id="opportunities-title">Work with<br />us in ways<br />that fit<br />your goals<span>.</span></h2>
+            <h2 id="opportunities-title">Work with<br />us in ways<br />that fit<br />your goals</h2>
           </div>
           <div className={styles.opportunityGrid}>
             {opportunities.map((opportunity, index) => (
@@ -163,7 +124,7 @@ export default function PartnershipPage() {
               </article>
             ))}
           </div>
-          <PageMarker>03</PageMarker>
+          <PageMarker>02</PageMarker>
         </section>
 
         <section className={styles.contact} id="contact" aria-labelledby="contact-title">
@@ -176,7 +137,7 @@ export default function PartnershipPage() {
             </p>
           </div>
           <PartnershipForm />
-          <PageMarker>04</PageMarker>
+          <PageMarker>03</PageMarker>
         </section>
       </main>
 

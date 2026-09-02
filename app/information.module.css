@@ -7,6 +7,7 @@
   overflow: hidden;
   background: var(--paper);
   color: var(--ink);
+  font-family: var(--font-body-mono), monospace;
 }
 
 .eyebrow {
@@ -34,8 +35,12 @@
   min-height: 100vh;
   min-height: 100svh;
   padding: clamp(5rem, 9vw, 10rem) clamp(4rem, 7.5vw, 9rem);
-  grid-template-columns: minmax(14rem, 0.38fr) minmax(0, 1fr);
-  gap: clamp(3rem, 8vw, 10rem);
+  grid-template-rows: auto 1fr;
+  gap: clamp(4rem, 8vw, 8rem);
+}
+
+.faqTitle {
+  max-width: none;
 }
 
 .sectionIntro {
@@ -43,12 +48,12 @@
 }
 
 .sectionIntro h2,
+.faqTitle,
 .contactIntro h2 {
   max-width: 11ch;
   margin: 0;
-  font-family: "Recursive Variable", Arial, Helvetica, sans-serif;
-  font-size: clamp(2.1rem, 3.6vw, 4.5rem);
-  font-variation-settings: "MONO" 0, "CASL" 0, "wght" 780;
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
+  font-size: var(--up-heading-section);
   letter-spacing: -0.07em;
   line-height: 0.92;
   text-transform: uppercase;
@@ -59,13 +64,15 @@
   max-width: 31rem;
   margin: 1.75rem 0 0;
   color: var(--muted);
-  font-family: "Recursive Variable", Arial, Helvetica, sans-serif;
-  font-size: clamp(0.74rem, 0.86vw, 0.92rem);
-  font-variation-settings: "MONO" 1, "CASL" 0, "wght" 420;
+  font-family: var(--font-body-mono), monospace;
+  font-size: var(--up-body-small);
   line-height: 1.65;
 }
 
 .faqList {
+  width: min(100%, 62rem);
+  align-self: center;
+  justify-self: center;
   border-top: 1px solid #aaa8a2;
 }
 
@@ -100,9 +107,8 @@
 }
 
 .faqQuestion {
-  font-family: "Recursive Variable", Arial, Helvetica, sans-serif;
-  font-size: clamp(1rem, 1.45vw, 1.55rem);
-  font-variation-settings: "MONO" 0, "CASL" 0, "wght" 640;
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
+  font-size: clamp(1.15rem, 1.45vw, 1.75rem);
   letter-spacing: -0.035em;
   line-height: 1.15;
 }
@@ -139,8 +145,8 @@
   margin: 0;
   padding: 0 3rem clamp(1.75rem, 3vw, 3rem) 3.5rem;
   color: #4f4e4a;
-  font-family: "Recursive Variable", Arial, Helvetica, sans-serif;
-  font-size: clamp(0.82rem, 1vw, 1.02rem);
+  font-family: var(--font-body-mono), monospace;
+  font-size: var(--up-body);
   font-variation-settings: "MONO" 1, "CASL" 0, "wght" 420;
   line-height: 1.7;
 }
@@ -203,7 +209,7 @@
 .contactLinks a:hover,
 .contactLinks a:focus-visible {
   padding-left: 0.4rem;
-  color: #4b91f0;
+  color: var(--blue);
   outline: none;
 }
 
@@ -331,7 +337,7 @@
 }
 
 .consent input:focus-visible {
-  outline: 1px solid #4b91f0;
+  outline: 1px solid var(--blue);
   outline-offset: 2px;
 }
 
@@ -358,6 +364,32 @@
   text-transform: uppercase;
   cursor: not-allowed;
   opacity: 0.72;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.submitButton:not(:disabled) {
+  border-color: var(--paper);
+  color: var(--paper);
+  cursor: pointer;
+  opacity: 1;
+}
+
+.submitButton:not(:disabled):hover,
+.submitButton:not(:disabled):focus-visible {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: var(--paper);
+  outline: none;
+}
+
+.submitButton > span:last-child {
+  display: inline-block;
+  transition: transform 180ms ease;
+}
+
+.submitButton:not(:disabled):hover > span:last-child,
+.submitButton:not(:disabled):focus-visible > span:last-child {
+  transform: translate(0.18rem, -0.18rem);
 }
 
 .noise {
@@ -389,17 +421,16 @@
 }
 
 @media (max-width: 960px) {
-  .faqSection,
   .contactSection {
     grid-template-columns: 1fr;
   }
 
-  .faqSection,
   .contactSection {
     gap: 4rem;
   }
 
   .sectionIntro h2,
+  .faqTitle,
   .contactIntro h2 {
     max-width: 15ch;
   }
@@ -451,5 +482,77 @@
   .faqIcon::after,
   .contactLinks a {
     transition: none;
+  }
+
+  .submitButton,
+  .submitButton > span:last-child {
+    transition: none;
+  }
+}
+
+/* Contact and FAQ share the Home/About typography, gutters, and controls. */
+.sectionIntro h2,
+.faqTitle,
+.contactIntro h2 {
+  font-size: var(--up-heading-hero);
+  font-weight: 850;
+  line-height: 0.82;
+}
+
+.faqQuestion {
+  font-weight: 700;
+}
+
+.faqSection,
+.contactSection {
+  padding: var(--up-section-space) var(--up-page-gutter);
+}
+
+.eyebrow {
+  color: inherit;
+  font-family: var(--font-body-mono), monospace;
+  font-size: var(--up-label);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.eyebrow::before {
+  background: var(--blue);
+}
+
+.faqNumber,
+.formMeta,
+.field span {
+  font-size: var(--up-label);
+}
+
+.contactLinks a,
+.submitButton {
+  font-size: var(--up-control);
+}
+
+.field input,
+.field select,
+.field textarea {
+  padding: 0.65rem 0;
+  font-family: var(--font-body-mono), monospace;
+  font-size: var(--up-body);
+}
+
+.consent {
+  font-size: var(--up-body-small);
+}
+
+.submitButton {
+  padding: var(--up-button-padding);
+  border-color: var(--blue);
+}
+
+@media (max-width: 720px) {
+  .faqSection,
+  .contactSection {
+    padding-right: var(--up-page-gutter);
+    padding-left: var(--up-page-gutter);
   }
 }

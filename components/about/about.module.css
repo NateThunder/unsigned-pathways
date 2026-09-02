@@ -78,10 +78,6 @@
   text-transform: uppercase;
 }
 
-.blueFullStop {
-  color: #0759c9;
-}
-
 .copySide {
   max-width: 34rem;
   padding-top: clamp(3.2rem, 7vh, 6rem);

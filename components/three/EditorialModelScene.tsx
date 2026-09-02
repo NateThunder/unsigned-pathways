@@ -1,0 +1,172 @@
+"use client";
+
+import { useGLTF } from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import * as THREE from "three";
+import { useSceneVisibility } from "./useSceneVisibility";
+
+type EditorialModelSceneProps = {
+  animate?: boolean;
+  className?: string;
+  modelPath: string;
+  preserveMaterials?: boolean;
+  rotation?: [number, number, number];
+  targetSize?: number;
+};
+
+type EditorialModelProps = {
+  modelPath: string;
+  motionAllowed: boolean;
+  preserveMaterials: boolean;
+  rotation: [number, number, number];
+  targetSize: number;
+};
+
+function EditorialModel({
+  modelPath,
+  motionAllowed,
+  preserveMaterials,
+  rotation,
+  targetSize,
+}: EditorialModelProps) {
+  const { scene } = useGLTF(modelPath);
+  const group = useRef<THREE.Group>(null);
+
+  const model = useMemo(() => {
+    const clone = scene.clone(true);
+    const bounds = new THREE.Box3().setFromObject(clone);
+    const size = bounds.getSize(new THREE.Vector3());
+    const center = bounds.getCenter(new THREE.Vector3());
+    const scale = targetSize / Math.max(size.x, size.y, size.z);
+
+    clone.position.copy(center).multiplyScalar(-1);
+    clone.traverse((object) => {
+      if (
+        !(object instanceof THREE.Mesh) ||
+        object.name === "editorial-outline"
+      ) {
+        return;
+      }
+
+      if (preserveMaterials) {
+        object.material = Array.isArray(object.material)
+          ? object.material.map((material) => material.clone())
+          : object.material.clone();
+        object.castShadow = true;
+        object.receiveShadow = true;
+        return;
+      }
+
+      object.material = new THREE.MeshToonMaterial({ color: "#0759c9" });
+
+      const outline = new THREE.Mesh(
+        object.geometry,
+        new THREE.MeshBasicMaterial({
+          color: "#0b0b0a",
+          side: THREE.BackSide,
+        }),
+      );
+      outline.name = "editorial-outline";
+      outline.scale.setScalar(1.012);
+      outline.renderOrder = 0;
+      object.add(outline);
+
+      object.castShadow = true;
+      object.receiveShadow = true;
+    });
+
+    return { clone, scale };
+  }, [preserveMaterials, scene, targetSize]);
+
+  useEffect(
+    () => () => {
+      model.clone.traverse((object) => {
+        if (!(object instanceof THREE.Mesh)) return;
+        const materials = Array.isArray(object.material)
+          ? object.material
+          : [object.material];
+        materials.forEach((material) => material.dispose());
+      });
+    },
+    [model],
+  );
+
+  useFrame(({ clock, pointer }, delta) => {
+    const object = group.current;
+    if (!object) return;
+
+    const frameDelta = Math.min(delta, 1 / 30);
+    const targetX = rotation[0] + (motionAllowed ? pointer.y * 0.08 : 0);
+    const targetY =
+      rotation[1] +
+      (motionAllowed
+        ? pointer.x * 0.12 + Math.sin(clock.elapsedTime * 0.42) * 0.08
+        : 0);
+
+    object.rotation.x = THREE.MathUtils.damp(object.rotation.x, targetX, 4, frameDelta);
+    object.rotation.y = THREE.MathUtils.damp(object.rotation.y, targetY, 4, frameDelta);
+    object.position.y = motionAllowed
+      ? Math.sin(clock.elapsedTime * 0.68) * 0.055
+      : 0;
+  });
+
+  return (
+    <group ref={group} rotation={rotation}>
+      <primitive object={model.clone} scale={model.scale} />
+    </group>
+  );
+}
+
+export function EditorialModelScene({
+  animate = true,
+  className,
+  modelPath,
+  preserveMaterials = false,
+  rotation = [-0.18, -0.35, 0.06],
+  targetSize = 4.6,
+}: EditorialModelSceneProps) {
+  const [motionAllowed, setMotionAllowed] = useState(true);
+  const { containerRef, shouldMount, isActive } = useSceneVisibility("200px 0px");
+
+  useEffect(() => {
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setMotionAllowed(!preference.matches);
+
+    updatePreference();
+    preference.addEventListener("change", updatePreference);
+    return () => preference.removeEventListener("change", updatePreference);
+  }, []);
+
+  return (
+    <div className={className} ref={containerRef} style={{ width: "100%", height: "100%" }}>
+      {shouldMount && (
+        <Canvas
+          dpr={[1, 1.4]}
+          frameloop={isActive ? "always" : "never"}
+          camera={{ position: [0, 0.15, 7], fov: 32, near: 0.1, far: 100 }}
+          gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
+          shadows
+        >
+          <ambientLight intensity={1.45} />
+          <directionalLight
+            castShadow
+            color="#fff5e5"
+            intensity={3.5}
+            position={[-4, 7, 8]}
+          />
+          <directionalLight color="#2f64ff" intensity={0.8} position={[5, 1, 5]} />
+          <Suspense fallback={null}>
+            <EditorialModel
+              modelPath={modelPath}
+              motionAllowed={animate && motionAllowed}
+              preserveMaterials={preserveMaterials}
+              rotation={rotation}
+              targetSize={targetSize}
+            />
+          </Suspense>
+        </Canvas>
+      )}
+    </div>
+  );
+}

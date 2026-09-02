@@ -66,11 +66,7 @@ export default function FaqPage() {
     <div className={styles.page}>
       <main id="home">
         <section className={styles.faqSection} aria-labelledby="questions-title">
-          <div className={styles.sectionIntro}>
-            <p className={styles.eyebrow}>Need to know</p>
-            <h2 id="questions-title">Your route, explained.</h2>
-            <p>Open a question to see the answer. If you still need help, use the Contact page.</p>
-          </div>
+          <h1 className={styles.faqTitle} id="questions-title">FAQ</h1>
           <div className={styles.faqList}>
             {questions.map((item, index) => (
               <details

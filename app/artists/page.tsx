@@ -1,15 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { IBM_Plex_Mono } from "next/font/google";
 import { Footer } from "../../components/Footer";
+import { EditorialModelScene } from "../../components/three/EditorialModelScene";
 import styles from "./page.module.css";
-
-const mono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-  variable: "--font-artists-mono",
-});
 
 export const metadata: Metadata = {
   title: "Artists | Unsigned Pathway",
@@ -74,69 +67,42 @@ function ArrowLink({ href, children, inverted = false }: {
 
 export default function ArtistsPage() {
   return (
-    <div className={`${styles.page} ${mono.variable}`}>
+    <div className={styles.page}>
       <main id="home">
-        <section className={styles.hero} aria-labelledby="artists-title">
-          <div className={styles.heroCopy}>
-            <SectionLabel>Artists / Pathway</SectionLabel>
-            <h1 id="artists-title">
-              Start where
-              <br />
-              you are. Go
-              <br />
-              further<span>.</span>
-            </h1>
-            <p className={styles.heroIntro}>
-              A free, artist-led pathway built around live experience, creative
-              development and community.
-            </p>
-            <div className={styles.heroActions}>
-              <ArrowLink href="#apply" inverted>Apply as an artist</ArrowLink>
-              <a className={styles.textLink} href="#pathway">
-                Explore the pathway <span aria-hidden="true">↓</span>
-              </a>
-            </div>
-          </div>
-
-          <div className={styles.heroRoute} aria-label="Pathway from sessions to mentoring">
-            <div className={styles.heroStatus}>
-              <p>Entry: <span>Open</span></p>
-              <p>Development: <span>Active</span></p>
-              <p>Access: <span>Free</span></p>
-            </div>
-            <div className={styles.routeTrack} aria-hidden="true">
-              <span className={styles.routeStart}>Artist</span>
-              <span className={styles.routeLine} />
-              {stages.map((stage) => (
-                <span className={styles.routeNode} key={stage.number}>
-                  <b>{stage.number}</b>
-                  <small>{stage.meta}</small>
-                </span>
-              ))}
-            </div>
-          </div>
-          <p className={styles.pageMarker} aria-hidden="true">01</p>
-        </section>
-
         <section className={styles.overview} id="pathway" aria-labelledby="pathway-title">
-          <div>
-            <SectionLabel>How it works</SectionLabel>
-            <h2 id="pathway-title">One pathway.<br />Three stages.</h2>
+          <div className={styles.overviewIntro}>
+            <div>
+              <SectionLabel>How it works</SectionLabel>
+              <h2 id="pathway-title">One pathway.<br />Three stages</h2>
+              <div className={styles.pathwayStatus} aria-label="Pathway status">
+                <p>Entry: <span>Open</span></p>
+                <p>Development: <span>Active</span></p>
+                <p>Access: <span>Free</span></p>
+              </div>
+            </div>
+            <div className={styles.overviewDetails}>
+              <p className={styles.overviewNote}>
+                You don&apos;t need to arrive with a polished image, industry contacts or a
+                perfect CV. Start by making music. Progression happens when you&apos;re ready.
+              </p>
+              <div>
+                <ArrowLink href="#apply" inverted>Apply as an artist</ArrowLink>
+              </div>
+            </div>
           </div>
           <ol className={styles.stageOverview}>
             {stages.map((stage) => (
               <li key={stage.number}>
-                <b>{stage.number}</b>
-                <span>{stage.meta}</span>
+                <p className={styles.stageOverviewMeta}>
+                  <b>{stage.number}</b>
+                  <span aria-hidden="true">--</span>
+                  {stage.meta}
+                </p>
+                <h3>{stage.title}</h3>
                 <small>{stage.status}</small>
               </li>
             ))}
           </ol>
-          <p className={styles.overviewNote}>
-            You don&apos;t need to arrive with a polished image, industry contacts or a
-            perfect CV. Start by making music. Progression happens when you&apos;re ready.
-          </p>
-          <p className={styles.pageMarker} aria-hidden="true">02</p>
         </section>
 
         <div className={styles.stages}>
@@ -145,7 +111,7 @@ export default function ArtistsPage() {
               <p className={styles.bigNumber} aria-hidden="true">{stage.number}</p>
               <div className={styles.stageCopy}>
                 <p className={styles.stageMeta}>{stage.number} / {stage.meta}<br />Status / {stage.status}</p>
-                <h2 id={`stage-${stage.number}`}>{stage.title}<span aria-hidden="true">.</span></h2>
+                <h2 id={`stage-${stage.number}`}>{stage.title}</h2>
                 <p className={styles.stageLine}>{stage.line}</p>
                 <p className={styles.stageBody}>{stage.body}</p>
                 <ArrowLink href="#apply">{stage.action}</ArrowLink>
@@ -159,6 +125,13 @@ export default function ArtistsPage() {
                 ))}
               </ol>
               <div className={styles.stageField} aria-hidden="true">
+                <div className={styles.stageModel}>
+                  <EditorialModelScene
+                    modelPath={index === 0 ? "/3d/synth_optimized.glb" : "/3d/therman7_optimized.glb"}
+                    rotation={index === 0 ? [0.95, -0.35, 0.08] : [-0.15, -0.45, 0.1]}
+                    targetSize={index === 0 ? 2.65 : 2.8}
+                  />
+                </div>
                 <span>{index === 0 ? "Live / Community / Momentum" : "Sound / Performance / Identity / Direction"}</span>
               </div>
               <p className={styles.pageMarker} aria-hidden="true">0{index + 3}</p>
@@ -193,7 +166,7 @@ export default function ArtistsPage() {
           <p className={styles.bigNumber} aria-hidden="true">03</p>
           <div className={styles.stageCopy}>
             <p className={styles.stageMeta}>03 / Leadership<br />Status / Coming soon</p>
-            <h2 id="stage-03">UP: Mentoring<span aria-hidden="true">.</span></h2>
+            <h2 id="stage-03">UP: Mentoring</h2>
             <p className={styles.stageLine}>Grow by giving back.</p>
             <p className={styles.stageBody}>{stages[2].body}</p>
             <ArrowLink href="#apply">Register interest</ArrowLink>
@@ -206,7 +179,16 @@ export default function ArtistsPage() {
               </li>
             ))}
           </ol>
-          <div className={styles.stageField} aria-hidden="true"><span>Share / Lead / Connect / Grow</span></div>
+          <div className={styles.stageField} aria-hidden="true">
+            <div className={styles.stageModel}>
+              <EditorialModelScene
+                modelPath="/3d/tape_optimized.glb"
+                rotation={[0.22, -0.4, -0.08]}
+                targetSize={2.45}
+              />
+            </div>
+            <span>Share / Lead / Connect / Grow</span>
+          </div>
           <p className={styles.pageMarker} aria-hidden="true">06</p>
         </section>
 

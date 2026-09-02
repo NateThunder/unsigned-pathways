@@ -12,9 +12,11 @@ export function useSceneVisibility(rootMargin = "300px 0px") {
     if (!container) return;
 
     if (!("IntersectionObserver" in window)) {
-      setShouldMount(true);
-      setIsActive(true);
-      return;
+      const timer = globalThis.setTimeout(() => {
+        setShouldMount(true);
+        setIsActive(true);
+      }, 0);
+      return () => globalThis.clearTimeout(timer);
     }
 
     const observer = new IntersectionObserver(

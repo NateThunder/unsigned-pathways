@@ -61,7 +61,7 @@ export function AboutSection() {
               <br />
               One artist-led
               <br />
-              ecosystem<span className={styles.blueFullStop}>.</span>
+              ecosystem
             </h2>
           </div>
 

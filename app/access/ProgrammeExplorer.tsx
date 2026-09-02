@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { EditorialModelScene } from "../../components/three/EditorialModelScene";
 import styles from "./page.module.css";
 
 const stages = [
@@ -54,45 +55,23 @@ export function ProgrammeExplorer() {
   );
 }
 
-const themes = [
-  {
-    label: "Songwriting",
-    value: "Ideas become lyrics, structure and an original voice.",
-  },
-  {
-    label: "Performance",
-    value: "Practice becomes presence, confidence and connection.",
-  },
-  {
-    label: "Recording",
-    value: "Sessions become tracks, technical skills and something to share.",
-  },
-] as const;
-
 export function ThemeMixer() {
-  const [activeTheme, setActiveTheme] = useState(1);
-
   return (
     <div className={styles.mixer}>
-      <div className={styles.mixerControls} role="group" aria-label="Explore programme themes">
-        {themes.map((theme, index) => (
-          <button
-            className={`${styles.mixerControl} ${activeTheme === index ? styles.mixerControlActive : ""}`}
-            key={theme.label}
-            type="button"
-            aria-pressed={activeTheme === index}
-            onClick={() => setActiveTheme(index)}
-          >
-            <span className={styles.controlLabel}>{theme.label}</span>
-            <span className={styles.dial} aria-hidden="true">
-              <span style={{ transform: `rotate(${index * 55 - 55}deg)` }} />
-            </span>
-          </button>
-        ))}
-      </div>
-      <div className={styles.mixerOutput} aria-live="polite">
-        <span>Channel {String(activeTheme + 1).padStart(2, "0")}</span>
-        <p>{themes[activeTheme].value}</p>
+      <div
+        className={styles.mixerControls}
+        role="img"
+        aria-label="Blue studio dials viewed from above"
+      >
+        <div className={styles.mixerModel} aria-hidden="true">
+          <EditorialModelScene
+            animate={false}
+            modelPath="/3d/blue_dials_optimized.glb"
+            preserveMaterials
+            rotation={[Math.PI / 2, 0, 0]}
+            targetSize={9.36}
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 .page {
-  --blue: #0b56d8;
+  --blue: var(--up-blue);
   --ink: #090909;
   --paper: #f4f1ec;
   --rule: #c6c1ba;
@@ -8,7 +8,7 @@
   overflow: hidden;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-partnership-mono), monospace;
+  font-family: var(--font-body-mono), monospace;
 }
 
 .hero,
@@ -37,6 +37,12 @@
   animation: rise-in 780ms 80ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.heroModel {
+  min-width: 0;
+  min-height: min(68vh, 42rem);
+  align-self: stretch;
+}
+
 .sectionLabel {
   display: flex;
   align-items: center;
@@ -61,21 +67,14 @@
 .sectionHeading h2,
 .contactCopy h2 {
   margin: 0;
-  font-family: "Recursive Variable", Arial, sans-serif;
-  font-variation-settings: "MONO" 0, "CASL" 0, "wght" 820;
+  font-family: var(--font-display), Arial, sans-serif;
   letter-spacing: -0.078em;
   line-height: 0.82;
   text-transform: uppercase;
 }
 
 .hero h1 {
-  font-size: clamp(3.4rem, 5.3vw, 6.75rem);
-}
-
-.hero h1 span,
-.sectionHeading h2 span,
-.contactCopy h2 span {
-  color: var(--blue);
+  font-size: var(--up-heading-hero);
 }
 
 .heroIntro {
@@ -110,11 +109,12 @@
   padding: 1rem 1.2rem;
   border: 1px solid var(--blue);
   color: var(--blue);
-  transition: background-color 180ms ease, color 180ms ease;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
 }
 
 .primaryAction:hover,
 .primaryAction:focus-visible {
+  border-color: var(--blue);
   background: var(--blue);
   color: var(--paper);
   outline: none;
@@ -190,7 +190,7 @@
 }
 
 .sectionHeading h2 {
-  font-size: clamp(2.15rem, 3vw, 3.7rem);
+  font-size: var(--up-heading-section);
 }
 
 .reasonGrid,
@@ -224,9 +224,8 @@
 .reason h3,
 .opportunity h3 {
   margin: 0 0 1.2rem;
-  font-family: "Recursive Variable", Arial, sans-serif;
-  font-size: clamp(1rem, 1.1vw, 1.3rem);
-  font-variation-settings: "MONO" 0, "wght" 720;
+  font-family: var(--font-display), Arial, sans-serif;
+  font-size: var(--up-heading-card);
   letter-spacing: -0.055em;
   line-height: 0.98;
   text-transform: uppercase;
@@ -318,7 +317,7 @@
 }
 
 .contactCopy h2 {
-  font-size: clamp(2.8rem, 3.8vw, 4.75rem);
+  font-size: var(--up-heading-section);
 }
 
 .contactCopy > p:last-child {
@@ -388,6 +387,25 @@
   font-variation-settings: "MONO" 1, "wght" 580;
   text-transform: uppercase;
   cursor: default;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.form button:hover,
+.form button:focus-visible {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: var(--paper);
+  outline: none;
+}
+
+.form button span {
+  display: inline-block;
+  transition: transform 180ms ease;
+}
+
+.form button:hover span,
+.form button:focus-visible span {
+  transform: translate(0.18rem, -0.18rem);
 }
 
 .contact .pageMarker {
@@ -461,6 +479,11 @@
     grid-column: 1 / -1;
   }
 
+  .heroModel {
+    min-height: 25rem;
+    grid-column: 1 / -1;
+  }
+
   .heroFacts {
     margin-top: 4rem;
     grid-column: 1;
@@ -505,6 +528,10 @@
 
   .heroFacts {
     margin-top: 3rem;
+  }
+
+  .heroModel {
+    min-height: 20rem;
   }
 
   .reasons,
@@ -564,7 +591,106 @@
 
   .primaryAction,
   .primaryAction span,
-  .secondaryAction span {
+  .secondaryAction span,
+  .form button,
+  .form button span {
     transition: none;
+  }
+}
+
+/* Shared Home/About rhythm. Partnership-specific grids and symbols stay intact. */
+.hero h1 {
+  font-size: var(--up-heading-hero);
+  font-weight: 850;
+  line-height: 0.82;
+}
+
+.sectionHeading h2,
+.contactCopy h2 {
+  font-size: var(--up-heading-section);
+  font-weight: 800;
+  line-height: 0.91;
+}
+
+.reason h3,
+.opportunity h3 {
+  font-size: var(--up-heading-card);
+  font-weight: 800;
+}
+
+.hero,
+.reasons,
+.opportunities,
+.contact {
+  width: min(calc(100% - (2 * var(--up-page-gutter))), var(--up-content-max));
+}
+
+.hero {
+  padding: clamp(2rem, 4vw, 4rem) 0 var(--up-section-space);
+}
+
+.reasons,
+.opportunities {
+  padding: var(--up-section-space) 0;
+}
+
+.sectionLabel {
+  font-family: var(--font-body-mono), monospace;
+  font-size: var(--up-label);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.form label > span {
+  font-size: var(--up-label);
+}
+
+.heroIntro,
+.contactCopy > p:last-child {
+  font-size: var(--up-body);
+  line-height: 1.55;
+}
+
+.reason > p:last-child,
+.opportunity > p {
+  max-width: 24rem;
+  font-size: var(--up-body-small);
+  line-height: 1.55;
+}
+
+.primaryAction,
+.secondaryAction,
+.form button {
+  font-size: var(--up-control);
+}
+
+.primaryAction,
+.form button {
+  padding: var(--up-button-padding);
+  border-color: var(--ink);
+  background: transparent;
+  color: var(--ink);
+}
+
+.form input,
+.form textarea {
+  padding: 0.65rem 0;
+  font-family: var(--font-body-mono), monospace;
+  font-size: var(--up-body-small);
+}
+
+@media (max-width: 800px) {
+  .hero,
+  .reasons,
+  .opportunities {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact {
+    padding: var(--up-section-space) var(--up-page-gutter);
   }
 }
