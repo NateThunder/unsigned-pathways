@@ -1,0 +1,875 @@
+.page {
+  --blue: #0758c9;
+  --ink: #090909;
+  --paper: #f3f1eb;
+  --rule: #c8c5be;
+  min-height: 100vh;
+  padding-top: clamp(5.75rem, 9vw, 8rem);
+  overflow: hidden;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-artists-mono), monospace;
+}
+
+.hero,
+.overview,
+.stage,
+.eligibility,
+.cta,
+.system {
+  position: relative;
+  width: calc(100% - clamp(2.5rem, 5vw, 6rem));
+  max-width: 112rem;
+  margin: 0 auto;
+}
+
+.hero {
+  display: grid;
+  min-height: calc(100svh - clamp(5.75rem, 9vw, 8rem));
+  grid-template-columns: minmax(22rem, 0.86fr) minmax(27rem, 1.14fr);
+  align-items: center;
+  gap: clamp(3rem, 7vw, 9rem);
+  padding: 2rem 1.8rem 4.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.sectionLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin: 0 0 clamp(1.5rem, 2.5vw, 2.8rem);
+  font-family: "Recursive Variable", sans-serif;
+  font-size: 0.66rem;
+  font-variation-settings: "MONO" 1, "wght" 560;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sectionLabel span {
+  width: 0.55rem;
+  height: 0.55rem;
+  background: var(--blue);
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 2;
+  animation: rise-in 750ms 120ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero h1 {
+  max-width: 9.5em;
+  margin: 0;
+  font-family: "Recursive Variable", Arial, sans-serif;
+  font-size: clamp(3.7rem, 6.5vw, 8.4rem);
+  font-variation-settings: "MONO" 0, "CASL" 0, "wght" 760;
+  letter-spacing: -0.075em;
+  line-height: 0.87;
+  text-transform: uppercase;
+}
+
+.hero h1 span,
+.stage h2 span {
+  color: var(--blue);
+}
+
+.heroIntro {
+  max-width: 37rem;
+  margin: clamp(1.7rem, 3vw, 3rem) 0 0;
+  font-size: clamp(0.72rem, 0.88vw, 0.92rem);
+  line-height: 1.7;
+  text-transform: uppercase;
+}
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.8rem, 4vw, 5rem);
+  margin-top: clamp(2rem, 3.2vw, 3.5rem);
+}
+
+.arrowLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.15rem;
+  color: var(--blue);
+  font-family: "Recursive Variable", sans-serif;
+  font-size: 0.65rem;
+  font-variation-settings: "MONO" 1, "wght" 540;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.arrowLink > span:last-child,
+.textLink span,
+.waitlist a span {
+  display: inline-block;
+  transition: transform 180ms ease;
+}
+
+.arrowLink:hover > span:last-child,
+.arrowLink:focus-visible > span:last-child,
+.waitlist a:hover span,
+.waitlist a:focus-visible span {
+  transform: translate(0.18rem, -0.18rem);
+}
+
+.arrowLinkInverted {
+  padding: 1rem 1.25rem;
+  background: var(--blue);
+  color: var(--paper);
+}
+
+.textLink {
+  color: inherit;
+  font-family: "Recursive Variable", sans-serif;
+  font-size: 0.65rem;
+  font-variation-settings: "MONO" 1, "wght" 520;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.textLink span {
+  margin-left: 0.7rem;
+}
+
+.textLink:hover span,
+.textLink:focus-visible span {
+  transform: translateY(0.2rem);
+}
+
+.heroRoute {
+  position: relative;
+  align-self: stretch;
+  min-height: 36rem;
+  animation: route-in 900ms 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.heroStatus {
+  position: absolute;
+  top: 8%;
+  right: 0;
+  font-size: clamp(0.58rem, 0.7vw, 0.72rem);
+  line-height: 1.9;
+  text-transform: uppercase;
+}
+
+.heroStatus p {
+  margin: 0;
+}
+
+.heroStatus span {
+  color: var(--blue);
+}
+
+.routeTrack {
+  position: absolute;
+  inset: 23% 4% 12% 0;
+}
+
+.routeLine {
+  position: absolute;
+  top: 53%;
+  left: 5%;
+  width: 88%;
+  height: 1px;
+  background: var(--blue);
+  transform: rotate(-15deg);
+  transform-origin: left center;
+}
+
+.routeLine::before,
+.routeLine::after {
+  position: absolute;
+  width: 7rem;
+  height: 7rem;
+  border: 1px solid var(--blue);
+  content: "";
+  transform: rotate(45deg);
+}
+
+.routeLine::before {
+  bottom: -3.5rem;
+  left: 30%;
+}
+
+.routeLine::after {
+  top: -3.5rem;
+  right: 4%;
+}
+
+.routeStart,
+.routeNode {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  text-transform: uppercase;
+}
+
+.routeStart {
+  bottom: 3%;
+  left: 0;
+  width: 5.5rem;
+  height: 5.5rem;
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  font-size: 0.62rem;
+  transform: rotate(45deg);
+}
+
+.routeStart::first-line {
+  transform: rotate(-45deg);
+}
+
+.routeNode {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--blue), 0 0 0 0.65rem var(--paper), 0 0 0 calc(0.65rem + 1px) var(--blue);
+}
+
+.routeNode b {
+  color: var(--blue);
+  font-family: "Recursive Variable", sans-serif;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.routeNode small {
+  font-size: 0.5rem;
+}
+
+.routeNode:nth-of-type(3) { left: 25%; bottom: 19%; }
+.routeNode:nth-of-type(4) { left: 54%; top: 31%; }
+.routeNode:nth-of-type(5) { right: 0; top: 2%; }
+
+.pageMarker {
+  position: absolute;
+  right: 0;
+  bottom: 1.8rem;
+  margin: 0;
+  padding-right: 3.4rem;
+  font-size: 0.58rem;
+}
+
+.pageMarker::after {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 2.5rem;
+  height: 1px;
+  background: currentColor;
+  content: "";
+  opacity: 0.45;
+}
+
+.overview {
+  display: grid;
+  grid-template-columns: 0.72fr 2.1fr;
+  gap: 3rem 6rem;
+  padding: clamp(3rem, 5vw, 5rem) 1.8rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.overview h2,
+.eligibility h2 {
+  margin: 0;
+  font-family: "Recursive Variable", sans-serif;
+  font-size: clamp(1.6rem, 2.25vw, 2.7rem);
+  font-variation-settings: "MONO" 0, "wght" 700;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.stageOverview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(2rem, 5vw, 6rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stageOverview li {
+  position: relative;
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+  text-transform: uppercase;
+}
+
+.stageOverview li:not(:last-child)::after {
+  position: absolute;
+  top: 2.6rem;
+  left: calc(100% - 0.5rem);
+  width: clamp(2rem, 5vw, 6rem);
+  height: 1px;
+  background: var(--blue);
+  content: "";
+}
+
+.stageOverview b {
+  color: var(--blue);
+  font-family: "Recursive Variable", sans-serif;
+  font-size: 1.4rem;
+}
+
+.stageOverview span {
+  margin-top: 0.45rem;
+  font-family: "Recursive Variable", sans-serif;
+  font-size: 1.25rem;
+  font-variation-settings: "wght" 520;
+}
+
+.stageOverview small {
+  font-size: 0.58rem;
+}
+
+.overviewNote {
+  grid-column: 2;
+  max-width: 46rem;
+  margin: 0;
+  font-size: 0.62rem;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.stage {
+  display: grid;
+  min-height: 36rem;
+  grid-template-columns: 0.52fr 0.94fr 0.82fr 1.25fr;
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 4rem);
+  padding: clamp(3rem, 5vw, 6rem) 1.8rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.bigNumber {
+  align-self: start;
+  margin: 0;
+  color: var(--blue);
+  font-family: "Recursive Variable", sans-serif;
+  font-size: clamp(6.5rem, 11vw, 13rem);
+  font-variation-settings: "MONO" 0, "wght" 720;
+  letter-spacing: -0.1em;
+  line-height: 0.7;
+}
+
+.stageMeta {
+  margin: 0 0 clamp(2rem, 3.5vw, 4rem);
+  font-size: 0.58rem;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.stage h2 {
+  margin: 0;
+  font-family: "Recursive Variable", sans-serif;
+  font-size: clamp(2rem, 3.6vw, 4.3rem);
+  font-variation-settings: "MONO" 0, "wght" 720;
+  letter-spacing: -0.07em;
+  line-height: 0.87;
+  text-transform: uppercase;
+}
+
+.stageLine {
+  margin: 1.3rem 0;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+}
+
+.stageBody {
+  max-width: 32rem;
+  margin: 0 0 2rem;
+  color: #3b3a37;
+  font-size: 0.68rem;
+  line-height: 1.55;
+}
+
+.outcomes {
+  display: grid;
+  gap: 1.1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.64rem;
+  text-transform: uppercase;
+}
+
+.outcomes li {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0.75rem;
+}
+
+.outcomes span {
+  color: var(--blue);
+}
+
+.stageField {
+  position: relative;
+  align-self: stretch;
+  min-height: 20rem;
+  border: 1px solid var(--blue);
+  background:
+    linear-gradient(90deg, transparent 49.9%, rgb(7 88 201 / 22%) 50%, transparent 50.1%),
+    linear-gradient(transparent 49.9%, rgb(7 88 201 / 22%) 50%, transparent 50.1%);
+  background-size: 4.5rem 4.5rem;
+}
+
+.stageField::before,
+.stageField::after {
+  position: absolute;
+  border: 1px solid var(--blue);
+  border-radius: 50%;
+  content: "";
+}
+
+.stageField::before {
+  inset: 12% 18%;
+}
+
+.stageField::after {
+  inset: 30% 34%;
+  background: var(--blue);
+}
+
+.stageField span {
+  position: absolute;
+  right: 0.7rem;
+  bottom: 0.6rem;
+  left: 0.7rem;
+  z-index: 1;
+  color: var(--paper);
+  font-size: 0.5rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.system {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  padding: clamp(2.5rem, 4vw, 4.5rem) clamp(2rem, 3.5vw, 4rem);
+  background: var(--blue);
+  color: #fff;
+}
+
+.systemEyebrow {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+}
+
+.systemFlow {
+  display: grid;
+  grid-template-columns: repeat(9, auto);
+  align-items: center;
+  gap: clamp(0.8rem, 2vw, 2.5rem);
+}
+
+.systemFlow div {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.systemFlow small {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.systemFlow strong {
+  max-width: 8rem;
+  font-size: 0.58rem;
+  font-weight: 400;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.systemSignal {
+  align-self: center;
+  padding: 1.25rem;
+  border: 1px solid #fff;
+  font-size: 0.58rem;
+  line-height: 1.7;
+  text-transform: uppercase;
+}
+
+.systemSignal p {
+  margin: 0;
+}
+
+.system .pageMarker {
+  bottom: auto;
+  top: 1rem;
+  right: 1rem;
+}
+
+.finalStage {
+  margin-top: 2rem;
+}
+
+.eligibility {
+  display: grid;
+  grid-template-columns: 0.7fr 2fr 0.52fr;
+  align-items: end;
+  gap: 3rem;
+  padding: clamp(2.5rem, 4vw, 4rem) 1.8rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.eligibility ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  margin: 0;
+  padding: 0 0 0.5rem;
+  list-style: none;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+}
+
+.eligibility li:not(:last-child)::after {
+  margin-left: clamp(1rem, 3vw, 3rem);
+  content: "+";
+}
+
+.eligibility > p:not(.pageMarker) {
+  margin: 0;
+  font-size: 0.6rem;
+  line-height: 1.7;
+  text-transform: uppercase;
+}
+
+.cta {
+  display: grid;
+  grid-template-columns: 1fr auto 0.85fr;
+  align-items: center;
+  gap: clamp(2rem, 6vw, 7rem);
+  margin-block: 1rem;
+  padding: clamp(2.5rem, 4vw, 4.5rem) clamp(2rem, 3.5vw, 4rem);
+  background: var(--blue);
+  color: #fff;
+}
+
+.cta > div:first-child > p,
+.waitlist p {
+  margin: 0 0 0.65rem;
+  font-size: 0.57rem;
+  text-transform: uppercase;
+}
+
+.cta h2 {
+  margin: 0;
+  font-family: "Recursive Variable", sans-serif;
+  font-size: clamp(1.75rem, 3vw, 3.5rem);
+  font-variation-settings: "MONO" 0, "wght" 720;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.cta small {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.56rem;
+  text-transform: uppercase;
+}
+
+.cta .arrowLinkInverted {
+  background: var(--paper);
+  color: var(--blue);
+}
+
+.waitlist {
+  padding-left: clamp(1.5rem, 4vw, 4.5rem);
+  border-left: 1px solid rgb(255 255 255 / 45%);
+}
+
+.waitlist a {
+  color: inherit;
+  font-size: 0.6rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.waitlist a span {
+  margin-left: 0.7rem;
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-image: url("/textures/noise.webp");
+  opacity: 0.035;
+  pointer-events: none;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(1.5rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes route-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 1050px) {
+  .hero {
+    grid-template-columns: 1fr 0.8fr;
+  }
+
+  .heroRoute {
+    min-height: 30rem;
+  }
+
+  .routeNode {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+
+  .stage {
+    grid-template-columns: 0.38fr 1fr 0.8fr;
+  }
+
+  .stageField {
+    display: none;
+  }
+
+  .systemFlow {
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+  }
+
+  .systemFlow > :nth-child(6),
+  .systemFlow > :nth-child(7),
+  .systemFlow > :nth-child(8),
+  .systemFlow > :nth-child(9) {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .header {
+    height: 5.5rem;
+  }
+
+  .hero,
+  .overview,
+  .stage,
+  .eligibility,
+  .cta,
+  .system {
+    width: calc(100% - 2rem);
+  }
+
+  .hero {
+    min-height: calc(100svh - 5.5rem);
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 1rem;
+    padding: 3rem 0.5rem 5rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.15rem, 15vw, 6.5rem);
+  }
+
+  .heroRoute {
+    min-height: 12rem;
+  }
+
+  .heroStatus {
+    top: 1rem;
+    right: 0.5rem;
+  }
+
+  .routeTrack {
+    inset: 0;
+  }
+
+  .routeStart,
+  .routeLine::before,
+  .routeLine::after {
+    display: none;
+  }
+
+  .routeLine {
+    top: 70%;
+    left: 8%;
+    width: 82%;
+    transform: none;
+  }
+
+  .routeNode {
+    top: auto !important;
+    bottom: 0 !important;
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+
+  .routeNode:nth-of-type(3) { left: 2%; }
+  .routeNode:nth-of-type(4) { left: calc(50% - 2.25rem); }
+  .routeNode:nth-of-type(5) { right: 2%; }
+
+  .routeNode b { font-size: 1rem; }
+  .routeNode small { font-size: 0.42rem; }
+
+  .overview {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding-inline: 0.5rem;
+  }
+
+  .stageOverview {
+    gap: 1.25rem;
+  }
+
+  .stageOverview li:not(:last-child)::after {
+    display: none;
+  }
+
+  .stageOverview span {
+    font-size: 0.82rem;
+  }
+
+  .overviewNote {
+    grid-column: 1;
+  }
+
+  .stage {
+    grid-template-columns: 0.42fr 1.58fr;
+    align-items: start;
+    padding-inline: 0.5rem;
+  }
+
+  .bigNumber {
+    font-size: clamp(4.2rem, 20vw, 7rem);
+  }
+
+  .outcomes {
+    grid-column: 2;
+    margin-top: 1rem;
+  }
+
+  .system {
+    grid-template-columns: 1fr;
+    padding: 2.5rem 1.25rem;
+  }
+
+  .systemFlow {
+    grid-template-columns: 1fr;
+  }
+
+  .systemFlow > span {
+    transform: rotate(90deg);
+    transform-origin: left center;
+  }
+
+  .systemFlow > :nth-child(6),
+  .systemFlow > :nth-child(7),
+  .systemFlow > :nth-child(8),
+  .systemFlow > :nth-child(9) {
+    display: grid;
+  }
+
+  .eligibility {
+    grid-template-columns: 1fr;
+    align-items: start;
+    padding-inline: 0.5rem;
+  }
+
+  .eligibility ul {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .cta {
+    grid-template-columns: 1fr;
+    align-items: start;
+    padding: 2.5rem 1.25rem;
+  }
+
+  .waitlist {
+    padding: 1.5rem 0 0;
+    border-top: 1px solid rgb(255 255 255 / 45%);
+    border-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroActions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .heroRoute {
+    min-height: 10rem;
+  }
+
+  .routeNode {
+    width: 3.65rem;
+    height: 3.65rem;
+  }
+
+  .routeNode:nth-of-type(4) { left: calc(50% - 1.825rem); }
+
+  .stageOverview {
+    grid-template-columns: 1fr;
+  }
+
+  .stageOverview li {
+    grid-template-columns: 2.5rem 1fr auto;
+    align-items: baseline;
+  }
+
+  .stageOverview span {
+    margin: 0;
+  }
+
+  .stage {
+    grid-template-columns: 1fr;
+  }
+
+  .bigNumber {
+    margin-bottom: 1.5rem;
+  }
+
+  .outcomes {
+    grid-column: 1;
+  }
+
+  .eligibility li:not(:last-child)::after {
+    margin-left: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroCopy,
+  .heroRoute {
+    animation: none;
+  }
+
+  .arrowLink > span:last-child,
+  .textLink span,
+  .waitlist a span {
+    transition: none;
+  }
+}

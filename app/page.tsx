@@ -1,10 +1,6 @@
-import Image from "next/image";
 import { AboutSection } from "../components/about/AboutSection";
 import { BenefitsSection } from "../components/benefits/BenefitsSection";
-import { DesktopNavigation } from "../components/DesktopNavigation";
 import { Footer } from "../components/Footer";
-import { MobileNavigation } from "../components/MobileNavigation";
-import logo from "../public/photos/flat logo with blue.png";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -12,9 +8,6 @@ export default function Home() {
     <>
       <main>
         <section className={styles.hero} id="home" aria-label="Unsigned Pathways">
-          <Image className={styles.logo} src={logo} alt="Unsigned Pathways" priority />
-          <DesktopNavigation />
-          <MobileNavigation />
           <video
             className={styles.heroVideo}
             autoPlay

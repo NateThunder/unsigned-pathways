@@ -1,0 +1,139 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { IBM_Plex_Mono } from "next/font/google";
+import styles from "./page.module.css";
+
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+  variable: "--font-festival-mono",
+});
+
+export const metadata: Metadata = {
+  title: "UP Festival | Unsigned Pathway",
+  description:
+    "UP Festival brings emerging talent and communities together through live music, creativity and culture.",
+};
+
+const festivalDetails = [
+  { label: "Date", value: "Coming soon" },
+  { label: "Location", value: "Scotland" },
+  { label: "Status", value: "In planning" },
+] as const;
+
+const festivalLinks = [
+  { number: "01", label: "Explore the festival", href: "#festival" },
+  { number: "02", label: "View artists", href: "/artists" },
+  { number: "03", label: "Get updates", href: "#updates" },
+] as const;
+
+function Spark() {
+  return (
+    <span className={styles.spark} aria-hidden="true">
+      <i />
+      <i />
+      <i />
+      <i />
+    </span>
+  );
+}
+
+export default function UpFestivalPage() {
+  return (
+    <div className={`${styles.page} ${mono.variable}`}>
+      <main className={styles.main} id="home">
+        <section className={styles.poster} id="festival" aria-labelledby="festival-title">
+          <div className={styles.intro}>
+            <p className={styles.eyebrow}>
+              <span aria-hidden="true" />
+              UP Festival
+            </p>
+
+            <h1 id="festival-title">
+              Music<span>.</span>
+              <br />
+              Community<span>.</span>
+              <br />
+              Future<span>.</span>
+            </h1>
+
+            <div className={styles.introRule} aria-hidden="true" />
+            <p className={styles.summary}>
+              A festival that celebrates emerging talent and brings people together
+              through live music, creativity and culture.
+            </p>
+
+            <div className={styles.manifesto}>
+              <Spark />
+              <p>
+                A platform.
+                <br />
+                A celebration.
+                <br />
+                A movement.
+              </p>
+            </div>
+          </div>
+
+          <div className={styles.emptyStage} aria-label="Festival artwork coming soon" />
+
+          <aside className={styles.details} aria-label="Festival details">
+            <dl>
+              {festivalDetails.map((detail) => (
+                <div className={styles.detail} key={detail.label}>
+                  <dt>{detail.label}</dt>
+                  <dd>{detail.value}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <div className={styles.planningMark} aria-hidden="true">
+              {Array.from({ length: 12 }, (_, index) => (
+                <i key={index} style={{ "--ray": index } as React.CSSProperties} />
+              ))}
+            </div>
+
+            <div className={styles.updates} id="updates">
+              <a href="mailto:hello@unsignedpathway.co.uk?subject=UP%20Festival%20updates">
+                Keep me updated <span aria-hidden="true">&#8599;</span>
+              </a>
+              <p>Sign up for news, artist announcements and more.</p>
+            </div>
+          </aside>
+        </section>
+
+        <nav className={styles.linkRail} aria-label="Festival links">
+          {festivalLinks.map((link) => (
+            <Link href={link.href} key={link.number}>
+              <span className={styles.linkNumber}>[{link.number}]</span>
+              <span className={styles.linkRule} aria-hidden="true" />
+              <strong>{link.label}</strong>
+              <span className={styles.linkArrow} aria-hidden="true">&#8599;</span>
+            </Link>
+          ))}
+        </nav>
+      </main>
+
+      <footer className={styles.footer}>
+        <p>&copy; 2026 Unsigned Pathway C.I.C.</p>
+        <nav aria-label="Legal links">
+          <a href="#privacy">Privacy</a>
+          <a href="#terms">Terms</a>
+          <a href="mailto:hello@unsignedpathway.co.uk">Contact</a>
+        </nav>
+        <div className={styles.socials} aria-label="Social media">
+          <span>IG</span>
+          <span>YT</span>
+          <span>FB</span>
+        </div>
+      </footer>
+
+      <span className={`${styles.corner} ${styles.cornerTopLeft}`} aria-hidden="true" />
+      <span className={`${styles.corner} ${styles.cornerTopRight}`} aria-hidden="true" />
+      <span className={`${styles.corner} ${styles.cornerBottomLeft}`} aria-hidden="true" />
+      <span className={`${styles.corner} ${styles.cornerBottomRight}`} aria-hidden="true" />
+      <div className={styles.noise} aria-hidden="true" />
+    </div>
+  );
+}
