@@ -108,7 +108,7 @@ export function PathwaysSection() {
       <div className={styles.intro}>
         <p className={styles.eyebrow}>Our pathways <span aria-hidden="true" /></p>
         <h2 id="pathways-title">Four pathways.</h2>
-        <p className={styles.script}>One ecosystem.</p>
+        <p className={styles.script}>One ecosystem</p>
         <p className={styles.description}>
           Enter where you are. Progress when you are ready. Every stage is
           artist-led and free to access.

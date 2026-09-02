@@ -1,14 +1,13 @@
 .page {
-  --blue: #0758c9;
+  --blue: var(--up-blue);
   --ink: #090909;
   --paper: #f3f1eb;
   --rule: #c8c5be;
   min-height: 100vh;
-  padding-top: clamp(5.75rem, 9vw, 8rem);
   overflow: hidden;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-artists-mono), monospace;
+  font-family: var(--font-body-mono), monospace;
 }
 
 .hero,
@@ -60,17 +59,11 @@
 .hero h1 {
   max-width: 9.5em;
   margin: 0;
-  font-family: "Recursive Variable", Arial, sans-serif;
-  font-size: clamp(3.7rem, 6.5vw, 8.4rem);
-  font-variation-settings: "MONO" 0, "CASL" 0, "wght" 760;
+  font-family: var(--font-display), Arial, sans-serif;
+  font-size: var(--up-heading-hero);
   letter-spacing: -0.075em;
   line-height: 0.87;
   text-transform: uppercase;
-}
-
-.hero h1 span,
-.stage h2 span {
-  color: var(--blue);
 }
 
 .heroIntro {
@@ -117,8 +110,18 @@
 
 .arrowLinkInverted {
   padding: 1rem 1.25rem;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.arrowLinkInverted:hover,
+.arrowLinkInverted:focus-visible {
+  border-color: var(--blue);
   background: var(--blue);
   color: var(--paper);
+  outline: none;
 }
 
 .textLink {
@@ -146,20 +149,18 @@
   animation: route-in 900ms 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.heroStatus {
-  position: absolute;
-  top: 8%;
-  right: 0;
+.pathwayStatus {
+  margin-top: clamp(2rem, 3vw, 3.5rem);
   font-size: clamp(0.58rem, 0.7vw, 0.72rem);
   line-height: 1.9;
   text-transform: uppercase;
 }
 
-.heroStatus p {
+.pathwayStatus p {
   margin: 0;
 }
 
-.heroStatus span {
+.pathwayStatus span {
   color: var(--blue);
 }
 
@@ -267,19 +268,35 @@
 }
 
 .overview {
+  isolation: isolate;
+  padding: clamp(4rem, 6vw, 7rem) 0 0;
+  color: #f4f3ee;
+}
+
+.overview::before {
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  z-index: -1;
+  width: 100vw;
+  background: #0b0b0a;
+  content: "";
+  transform: translateX(-50%);
+}
+
+.overviewIntro {
   display: grid;
-  grid-template-columns: 0.72fr 2.1fr;
-  gap: 3rem 6rem;
-  padding: clamp(3rem, 5vw, 5rem) 1.8rem;
-  border-bottom: 1px solid var(--rule);
+  grid-template-columns: minmax(18rem, 0.8fr) minmax(24rem, 1.2fr);
+  align-items: end;
+  gap: clamp(4rem, 10vw, 12rem);
+  padding: 0 clamp(1rem, 2vw, 2.5rem) clamp(4rem, 6vw, 7rem);
 }
 
 .overview h2,
 .eligibility h2 {
   margin: 0;
-  font-family: "Recursive Variable", sans-serif;
-  font-size: clamp(1.6rem, 2.25vw, 2.7rem);
-  font-variation-settings: "MONO" 0, "wght" 700;
+  font-family: var(--font-display), Arial, sans-serif;
+  font-size: var(--up-heading-card);
   letter-spacing: -0.055em;
   line-height: 0.95;
   text-transform: uppercase;
@@ -288,54 +305,82 @@
 .stageOverview {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(2rem, 5vw, 6rem);
   margin: 0;
   padding: 0;
+  border-top: 1px solid rgb(244 243 238 / 65%);
   list-style: none;
 }
 
 .stageOverview li {
   position: relative;
-  display: grid;
-  gap: 0.35rem;
   min-width: 0;
+  min-height: clamp(12rem, 23vh, 17rem);
+  padding: clamp(2rem, 3.4vh, 2.8rem) clamp(1.25rem, 2.1vw, 2.5rem);
+  border-left: 1px solid rgb(244 243 238 / 45%);
   text-transform: uppercase;
 }
 
-.stageOverview li:not(:last-child)::after {
-  position: absolute;
-  top: 2.6rem;
-  left: calc(100% - 0.5rem);
-  width: clamp(2rem, 5vw, 6rem);
-  height: 1px;
-  background: var(--blue);
-  content: "";
+.stageOverview li:first-child {
+  border-left: 0;
 }
 
-.stageOverview b {
+.stageOverviewMeta {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0 0 clamp(1rem, 1.9vh, 1.4rem);
+  font-size: clamp(0.68rem, 0.74vw, 0.82rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.stageOverviewMeta b,
+.stageOverviewMeta span {
   color: var(--blue);
-  font-family: "Recursive Variable", sans-serif;
-  font-size: 1.4rem;
 }
 
-.stageOverview span {
-  margin-top: 0.45rem;
-  font-family: "Recursive Variable", sans-serif;
-  font-size: 1.25rem;
-  font-variation-settings: "wght" 520;
+.stageOverviewMeta b {
+  font-weight: 400;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.stageOverview h3 {
+  margin: 0;
+  font-family: var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.5rem, 1.8vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
 }
 
 .stageOverview small {
+  display: block;
+  margin-top: clamp(3.25rem, 6vh, 5rem);
   font-size: 0.58rem;
 }
 
 .overviewNote {
-  grid-column: 2;
   max-width: 46rem;
   margin: 0;
-  font-size: 0.62rem;
-  line-height: 1.6;
+  padding-bottom: 0.15rem;
+  font-size: var(--up-body-small);
+  line-height: 1.55;
   text-transform: uppercase;
+}
+
+.overviewDetails {
+  display: grid;
+  gap: clamp(1.75rem, 3vw, 3rem);
+}
+
+.overview .arrowLinkInverted {
+  border-color: currentColor;
+  color: #f4f3ee;
+}
+
+.overview .arrowLinkInverted:hover,
+.overview .arrowLinkInverted:focus-visible {
+  border-color: var(--blue);
 }
 
 .stage {
@@ -354,7 +399,6 @@
   color: var(--blue);
   font-family: "Recursive Variable", sans-serif;
   font-size: clamp(6.5rem, 11vw, 13rem);
-  font-variation-settings: "MONO" 0, "wght" 720;
   letter-spacing: -0.1em;
   line-height: 0.7;
 }
@@ -368,9 +412,8 @@
 
 .stage h2 {
   margin: 0;
-  font-family: "Recursive Variable", sans-serif;
-  font-size: clamp(2rem, 3.6vw, 4.3rem);
-  font-variation-settings: "MONO" 0, "wght" 720;
+  font-family: var(--font-display), Arial, sans-serif;
+  font-size: var(--up-heading-section);
   letter-spacing: -0.07em;
   line-height: 0.87;
   text-transform: uppercase;
@@ -414,6 +457,7 @@
   position: relative;
   align-self: stretch;
   min-height: 20rem;
+  overflow: hidden;
   border: 1px solid var(--blue);
   background:
     linear-gradient(90deg, transparent 49.9%, rgb(7 88 201 / 22%) 50%, transparent 50.1%),
@@ -423,19 +467,12 @@
 
 .stageField::before,
 .stageField::after {
+  display: none;
+}
+
+.stageModel {
   position: absolute;
-  border: 1px solid var(--blue);
-  border-radius: 50%;
-  content: "";
-}
-
-.stageField::before {
-  inset: 12% 18%;
-}
-
-.stageField::after {
-  inset: 30% 34%;
-  background: var(--blue);
+  inset: 0;
 }
 
 .stageField span {
@@ -443,20 +480,32 @@
   right: 0.7rem;
   bottom: 0.6rem;
   left: 0.7rem;
-  z-index: 1;
-  color: var(--paper);
+  z-index: 2;
+  color: var(--ink);
   font-size: 0.5rem;
   text-align: center;
   text-transform: uppercase;
 }
 
 .system {
+  isolation: isolate;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 2rem;
   padding: clamp(2.5rem, 4vw, 4.5rem) clamp(2rem, 3.5vw, 4rem);
-  background: var(--blue);
+  background: transparent;
   color: #fff;
+}
+
+.system::before {
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  z-index: -1;
+  width: 100vw;
+  background: var(--blue);
+  content: "";
+  transform: translateX(-50%);
 }
 
 .systemEyebrow {
@@ -548,14 +597,26 @@
 }
 
 .cta {
+  isolation: isolate;
   display: grid;
   grid-template-columns: 1fr auto 0.85fr;
   align-items: center;
   gap: clamp(2rem, 6vw, 7rem);
   margin-block: 1rem;
   padding: clamp(2.5rem, 4vw, 4.5rem) clamp(2rem, 3.5vw, 4rem);
-  background: var(--blue);
+  background: transparent;
   color: #fff;
+}
+
+.cta::before {
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  z-index: -1;
+  width: 100vw;
+  background: var(--blue);
+  content: "";
+  transform: translateX(-50%);
 }
 
 .cta > div:first-child > p,
@@ -567,8 +628,8 @@
 
 .cta h2 {
   margin: 0;
-  font-family: "Recursive Variable", sans-serif;
-  font-size: clamp(1.75rem, 3vw, 3.5rem);
+  font-family: var(--font-display), Arial, sans-serif;
+  font-size: var(--up-heading-card);
   font-variation-settings: "MONO" 0, "wght" 720;
   letter-spacing: -0.06em;
   line-height: 0.9;
@@ -585,6 +646,13 @@
 .cta .arrowLinkInverted {
   background: var(--paper);
   color: var(--blue);
+}
+
+.cta .arrowLinkInverted:hover,
+.cta .arrowLinkInverted:focus-visible {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
 }
 
 .waitlist {
@@ -605,11 +673,16 @@
 
 .noise {
   position: fixed;
-  inset: 0;
+  inset: -50%;
   z-index: 100;
   background-image: url("/textures/noise.webp");
-  opacity: 0.035;
+  background-repeat: repeat;
+  background-size: 160px 160px;
+  filter: contrast(175%);
+  opacity: 0.055;
   pointer-events: none;
+  animation: noise-shift 240ms steps(2, jump-none) infinite;
+  will-change: transform;
 }
 
 .visuallyHidden {
@@ -630,6 +703,15 @@
 @keyframes route-in {
   from { opacity: 0; transform: scale(0.96); }
   to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes noise-shift {
+  0% { transform: translate3d(0, 0, 0); }
+  20% { transform: translate3d(-2%, 3%, 0); }
+  40% { transform: translate3d(3%, -2%, 0); }
+  60% { transform: translate3d(-3%, 1%, 0); }
+  80% { transform: translate3d(2%, -3%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 
 @media (max-width: 1050px) {
@@ -696,11 +778,6 @@
     min-height: 12rem;
   }
 
-  .heroStatus {
-    top: 1rem;
-    right: 0.5rem;
-  }
-
   .routeTrack {
     inset: 0;
   }
@@ -733,25 +810,17 @@
   .routeNode small { font-size: 0.42rem; }
 
   .overview {
-    grid-template-columns: 1fr;
-    gap: 3rem;
     padding-inline: 0.5rem;
   }
 
+  .overviewIntro {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding-inline: 0;
+  }
+
   .stageOverview {
-    gap: 1.25rem;
-  }
-
-  .stageOverview li:not(:last-child)::after {
-    display: none;
-  }
-
-  .stageOverview span {
-    font-size: 0.82rem;
-  }
-
-  .overviewNote {
-    grid-column: 1;
+    margin-inline: -0.5rem;
   }
 
   .stage {
@@ -836,12 +905,22 @@
   }
 
   .stageOverview li {
-    grid-template-columns: 2.5rem 1fr auto;
-    align-items: baseline;
+    min-height: 0;
+    padding: 2.4rem 0.5rem 2.8rem;
+    border-top: 1px solid rgb(244 243 238 / 34%);
+    border-left: 0;
   }
 
-  .stageOverview span {
-    margin: 0;
+  .stageOverview li:first-child {
+    border-top: 0;
+  }
+
+  .stageOverview h3 {
+    font-size: clamp(2rem, 10vw, 2.8rem);
+  }
+
+  .stageOverview small {
+    margin-top: 2rem;
   }
 
   .stage {
@@ -863,13 +942,126 @@
 
 @media (prefers-reduced-motion: reduce) {
   .heroCopy,
-  .heroRoute {
+  .heroRoute,
+  .noise {
     animation: none;
   }
 
   .arrowLink > span:last-child,
+  .arrowLinkInverted,
   .textLink span,
   .waitlist a span {
     transition: none;
+  }
+}
+
+/* Shared Home/About rhythm. Page-specific artwork and composition stay intact. */
+.hero h1 {
+  font-size: var(--up-heading-hero);
+  font-weight: 850;
+  line-height: 0.82;
+}
+
+.overview h2,
+.stage h2,
+.eligibility h2,
+.cta h2 {
+  font-weight: 800;
+  line-height: 0.91;
+}
+
+.stage h2 {
+  font-size: var(--up-heading-section);
+}
+
+.eligibility h2,
+.cta h2 {
+  font-size: var(--up-heading-card);
+}
+
+.overview h2 {
+  font-size: clamp(3rem, 3.6vw, 4.4rem);
+}
+
+.hero,
+.overview,
+.stage,
+.eligibility,
+.cta,
+.system {
+  width: min(calc(100% - (2 * var(--up-page-gutter))), var(--up-content-max));
+}
+
+.hero {
+  padding: 2rem 0 4.5rem;
+}
+
+.overview,
+.stage,
+.eligibility,
+.cta,
+.system {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.overview,
+.stage {
+  padding-top: var(--up-section-space);
+  padding-bottom: var(--up-section-space);
+}
+
+.overview {
+  padding-bottom: 0;
+}
+
+.sectionLabel {
+  font-family: var(--font-body-mono), monospace;
+  font-size: var(--up-label);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.heroIntro {
+  font-size: var(--up-body);
+  line-height: 1.55;
+}
+
+.overviewNote,
+.stageBody {
+  font-size: var(--up-body-small);
+  line-height: 1.55;
+}
+
+.stageLine,
+.outcomes,
+.eligibility ul,
+.eligibility > p:not(.pageMarker) {
+  font-size: var(--up-body-small);
+}
+
+.arrowLink,
+.textLink,
+.waitlist a {
+  font-size: var(--up-control);
+}
+
+.arrowLinkInverted {
+  padding: var(--up-button-padding);
+}
+
+@media (max-width: 760px) {
+  .hero {
+    padding: 3rem 0 5rem;
+  }
+
+  .overview,
+  .stage,
+  .eligibility,
+  .cta,
+  .system {
+    padding-right: 0;
+    padding-left: 0;
   }
 }

@@ -235,8 +235,8 @@
   display: grid;
   padding: clamp(5rem, 9vw, 9rem) clamp(4rem, 7.5vw, 9rem);
   background: var(--paper);
-  grid-template-columns: minmax(16rem, 0.7fr) minmax(0, 1.55fr);
-  gap: clamp(4rem, 8vw, 10rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
 }
 
 .identity .identityRoute {
@@ -251,7 +251,8 @@
   animation-timeline: view();
 }
 
-.whoWeAre {
+.whoWeAre,
+.mission h2 {
   font-family: var(--font-about-mono), monospace;
   font-size: clamp(0.75rem, 0.9vw, 1rem);
   line-height: 1.55;
@@ -269,13 +270,11 @@
 }
 
 .mission h2 {
-  max-width: 19ch;
+  max-width: 27rem;
   margin: 0;
-  font-size: clamp(1.1rem, 2.05vw, 2.6rem);
-  font-weight: 830;
-  letter-spacing: -0.058em;
-  line-height: 1.02;
-  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .programmes {
@@ -587,10 +586,6 @@
 
   .focus h2 {
     font-size: clamp(2.7rem, 13vw, 4rem);
-  }
-
-  .mission h2 {
-    font-size: clamp(1rem, 5vw, 1.6rem);
   }
 
   .programme {

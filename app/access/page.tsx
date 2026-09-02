@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono } from "next/font/google";
 import { Footer } from "../../components/Footer";
+import { EditorialModelScene } from "../../components/three/EditorialModelScene";
 import { EnquiryForm } from "./EnquiryForm";
 import { ProgrammeExplorer, ThemeMixer } from "./ProgrammeExplorer";
 import styles from "./page.module.css";
-
-const mono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-  variable: "--font-access-mono",
-});
 
 export const metadata: Metadata = {
   title: "Access Programme | Unsigned Pathway",
@@ -47,7 +40,7 @@ const settings = [
 
 export default function AccessPage() {
   return (
-    <div className={`${styles.page} ${mono.variable}`}>
+    <div className={styles.page}>
       <main id="home">
         <section className={styles.hero} aria-labelledby="access-title">
           <div className={styles.heroCopy}>
@@ -55,7 +48,7 @@ export default function AccessPage() {
             <h1 id="access-title">
               Creative access
               <br />
-              for young people<span>.</span>
+              for young people
             </h1>
             <p className={styles.heroIntro}>
               Artist-led music programmes for ages 11-18, delivered with schools,
@@ -72,7 +65,13 @@ export default function AccessPage() {
           </div>
 
           <div className={styles.heroSignal} aria-hidden="true">
-            <p className={styles.signalAge}>11<span>-</span>18</p>
+            <div className={styles.heroSignalModel}>
+              <EditorialModelScene
+                modelPath="/3d/tom_optimized.glb"
+                rotation={[-0.18, -0.5, 0.08]}
+                targetSize={2.55}
+              />
+            </div>
             <div className={styles.signalScope}>
               <span />
               <span />
@@ -93,7 +92,7 @@ export default function AccessPage() {
           <div className={styles.sectionIntro}>
             <div>
               <SectionLabel>Our pathway. Their future.</SectionLabel>
-              <h2 id="programme-title">Discover.<br />Develop.<br />Share<span>.</span></h2>
+              <h2 id="programme-title">Discover.<br />Develop.<br />Share</h2>
             </div>
             <p>
               A flexible programme that takes young people from their first creative
@@ -107,7 +106,7 @@ export default function AccessPage() {
         <section className={styles.themes} aria-labelledby="themes-title">
           <div className={styles.themesHeading}>
             <SectionLabel>Explore the themes.</SectionLabel>
-            <h2 id="themes-title">Turn<br />the dial<span>.</span></h2>
+            <h2 id="themes-title">Turn<br />the dial</h2>
           </div>
           <ThemeMixer />
           <ul className={styles.themeOutcomes}>
@@ -125,7 +124,7 @@ export default function AccessPage() {
             {settings.map((setting) => (
               <article className={styles.setting} key={setting.number}>
                 <p>{setting.number}</p>
-                <h3>{setting.title}<span>.</span></h3>
+                <h3>{setting.title}</h3>
                 <p>{setting.body}</p>
               </article>
             ))}
@@ -144,7 +143,7 @@ export default function AccessPage() {
         <section className={styles.enquiry} id="enquire" aria-labelledby="enquiry-title">
           <div className={styles.enquiryHeading}>
             <SectionLabel>Ready to start?</SectionLabel>
-            <h2 id="enquiry-title">Let&apos;s make<br />something<br />happen<span>.</span></h2>
+            <h2 id="enquiry-title">Let&apos;s make<br />something<br />happen</h2>
           </div>
           <p className={styles.enquiryIntro}>
             Tell us about your group and what you would like young people to get from

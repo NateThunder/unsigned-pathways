@@ -22,6 +22,9 @@
 # production
 /build
 
+# source 3D models (optimized versions remain in public/3d)
+/public/3d/unoptimized-glbs/
+
 # misc
 .DS_Store
 *.pem

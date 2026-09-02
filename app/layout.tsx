@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
-import { Caveat, Cormorant_Garamond, Inter } from "next/font/google";
+import { Caveat, Cormorant_Garamond, IBM_Plex_Mono, Inter } from "next/font/google";
 import { SiteHeader } from "../components/SiteHeader";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-display",
+});
+const bodyMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+  variable: "--font-body-mono",
+});
 const editorial = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-editorial",
@@ -25,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body className={`${inter.className} ${editorial.variable} ${script.variable}`}>
+      <body className={`${inter.variable} ${bodyMono.variable} ${editorial.variable} ${script.variable}`}>
         <SiteHeader />
         {children}
       </body>
