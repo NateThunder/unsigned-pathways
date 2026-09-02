@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import { IBM_Plex_Mono } from "next/font/google";
-import { DesktopNavigation } from "../../components/DesktopNavigation";
 import { Footer } from "../../components/Footer";
-import { MobileNavigation } from "../../components/MobileNavigation";
 import { PathwayChain } from "../../components/about/PathwayChain";
-import logo from "../../public/photos/flat logo with blue.png";
 import { AboutHeroScene } from "./AboutHeroScene";
 import { CommunityGuitarScene } from "./CommunityGuitarScene";
 import { MusicSpeakerScene } from "./MusicSpeakerScene";
@@ -98,14 +93,6 @@ function Corners() {
 export default function AboutPage() {
   return (
     <div className={`${styles.page} ${ibmPlexMono.variable}`}>
-      <header>
-        <Link className={styles.logoLink} href="/#home" aria-label="Unsigned Pathway home">
-          <Image className={styles.logo} src={logo} alt="" priority />
-        </Link>
-        <DesktopNavigation />
-        <MobileNavigation />
-      </header>
-
       <main id="home">
         <section className={`${styles.section} ${styles.hero}`} aria-labelledby="about-title">
           <div className={styles.heroCopy}>

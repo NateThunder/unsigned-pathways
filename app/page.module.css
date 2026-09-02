@@ -45,14 +45,17 @@
   display: flex;
   align-items: center;
   gap: clamp(1rem, 2.25vw, 2.5rem);
-  color: rgb(233 234 228);
+  color: #fff;
   mix-blend-mode: difference;
   white-space: nowrap;
 }
 
-.navigation a {
+.navigation > a,
+.moreButton {
   display: inline-flex;
   align-items: baseline;
+  border: 0;
+  background: transparent;
   color: inherit;
   font-family: "Recursive Variable", Arial, Helvetica, sans-serif;
   font-size: clamp(0.7rem, 0.85vw, 0.9rem);
@@ -61,7 +64,8 @@
   text-transform: uppercase;
 }
 
-.navigation a:focus-visible {
+.navigation > a:focus-visible,
+.moreButton:focus-visible {
   outline: 1px solid currentColor;
   outline-offset: 0.45rem;
 }
@@ -82,9 +86,79 @@
 
 .navArrow {
   display: inline-block;
-  margin-left: 0.12rem;
-  font-size: 0.9em;
-  transform: translateY(-0.08em);
+  width: 0.42rem;
+  height: 0.42rem;
+  margin: 0 0 0.2rem 0.35rem;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 180ms ease;
+}
+
+.moreDropdown {
+  position: relative;
+}
+
+.moreButton {
+  padding: 0;
+  cursor: pointer;
+}
+
+.moreButton[aria-expanded="true"] .navArrow {
+  transform: translateY(0.18rem) rotate(225deg);
+}
+
+.morePanel {
+  position: absolute;
+  top: calc(100% + 0.9rem);
+  right: -0.75rem;
+  display: grid;
+  min-width: 10.5rem;
+  padding: 0.45rem;
+  border: 1px solid rgb(255 255 255 / 30%);
+  background: rgb(9 9 9 / 94%);
+  box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 22%);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-0.45rem);
+  transition: opacity 160ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.morePanelOpen {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.morePanel a {
+  display: grid;
+  padding: 0.8rem 0.75rem;
+  color: #e9eae4;
+  font-family: "Recursive Variable", Arial, Helvetica, sans-serif;
+  font-size: 0.72rem;
+  font-variation-settings: "MONO" 0, "CASL" 0, "wght" 560;
+  grid-template-columns: 2rem 1fr;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.morePanel a span {
+  color: #4488e9;
+  font-size: 0.58rem;
+}
+
+.morePanel a:hover,
+.morePanel a:focus-visible {
+  background: #0759c9;
+  color: #fff;
+  outline: none;
+}
+
+.morePanel a:hover span,
+.morePanel a:focus-visible span {
+  color: #fff;
 }
 
 .mobileNavigation {
@@ -161,6 +235,7 @@
     padding: 6rem 1.5rem 2rem;
     background: #0a0a0a;
     opacity: 0;
+    overflow-y: auto;
     pointer-events: none;
     transform: translateY(-1rem);
     transition:
@@ -176,6 +251,8 @@
 
   .mobileMenu nav {
     display: flex;
+    width: min(100%, 44rem);
+    margin: auto 0;
     flex-direction: column;
     align-items: flex-start;
   }
@@ -190,7 +267,60 @@
     text-transform: uppercase;
   }
 
+  .mobileMore {
+    width: 100%;
+  }
+
+  .mobileMore > button {
+    display: flex;
+    width: 100%;
+    padding: 0;
+    align-items: center;
+    justify-content: space-between;
+    border: 0;
+    background: transparent;
+    color: #e9eae4;
+    font-family: "Recursive Variable", Arial, Helvetica, sans-serif;
+    font-size: clamp(1.8rem, 9vw, 3.5rem);
+    font-variation-settings: "MONO" 0, "CASL" 0, "wght" 560, "slnt" 0, "CRSV" 0.5;
+    line-height: 1.2;
+    text-align: left;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .mobileMore > button span:last-child {
+    color: #2876e5;
+    font-weight: 350;
+  }
+
+  .mobileMorePanel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease;
+  }
+
+  .mobileMorePanel > div {
+    display: flex;
+    min-height: 0;
+    overflow: hidden;
+    flex-direction: column;
+  }
+
+  .mobileMorePanelOpen {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .mobileMenu .mobileMorePanel a {
+    padding: 0.2rem 0 0.2rem 1.5rem;
+    color: #4b8eee;
+    font-size: clamp(1.25rem, 6vw, 2rem);
+  }
+
   .mobileMenu a:focus-visible,
+  .mobileMore > button:focus-visible,
   .menuButton:focus-visible {
     outline: 1px solid currentColor;
     outline-offset: 0.25rem;
@@ -207,7 +337,10 @@
   }
 
   .mobileMenu,
-  .menuButtonLine {
+  .menuButtonLine,
+  .mobileMorePanel,
+  .navArrow,
+  .morePanel {
     transition: none;
   }
 }
