@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SocialLinks } from "../../components/SocialLinks";
 import { EditorialModelScene } from "../../components/three/EditorialModelScene";
 import styles from "./page.module.css";
 
@@ -43,7 +44,6 @@ export default function UpFestivalPage() {
               UP:Festival
             </h1>
 
-            <div className={styles.introRule} aria-hidden="true" />
             <p className={styles.summary}>
               A festival that celebrates emerging talent and brings people together
               through live music, creativity and culture.
@@ -116,11 +116,7 @@ export default function UpFestivalPage() {
           <a href="#terms">Terms</a>
           <a href="mailto:hello@unsignedpathway.co.uk">Contact</a>
         </nav>
-        <div className={styles.socials} aria-label="Social media">
-          <span>IG</span>
-          <span>YT</span>
-          <span>FB</span>
-        </div>
+        <SocialLinks className={styles.socials} />
       </footer>
 
       <span className={`${styles.corner} ${styles.cornerTopLeft}`} aria-hidden="true" />

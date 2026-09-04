@@ -157,7 +157,7 @@
   }
 
   .intro h2 {
-    font-size: clamp(2.75rem, 12.5vw, 4.8rem);
+    font-size: clamp(2rem, 11vw, 4.8rem);
   }
 
   .copy {

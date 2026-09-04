@@ -122,7 +122,7 @@ function MoreDropdown() {
         onFocus={scramble}
       >
         <ScrambleLabel label="More" labelRef={labelRef} />
-        <span className={styles.navArrow} aria-hidden="true" />
+        <span className={styles.navPlus} aria-hidden="true" />
       </button>
       <div
         className={`${styles.morePanel} ${isOpen ? styles.morePanelOpen : ""}`}

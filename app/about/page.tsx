@@ -178,7 +178,6 @@ export default function AboutPage() {
               creating access to opportunities for those often overlooked.
             </p>
           </div>
-          <PathwayChain className={styles.identityRoute} />
           <div className={styles.mission}>
             <SectionLabel>Our mission</SectionLabel>
             <h2>
