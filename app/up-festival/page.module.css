@@ -29,31 +29,25 @@
   animation: intro-in 760ms 80ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.eyebrow {
+.festivalHeading {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   margin: 0 0 clamp(2.5rem, 4vw, 4.5rem);
-  font-family: "Recursive Variable", Arial, sans-serif;
-  font-size: clamp(0.62rem, 0.7vw, 0.75rem);
-  font-variation-settings: "MONO" 1, "wght" 560;
-  letter-spacing: 0.035em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(3.8rem, 4.55vw, 5.6rem);
+  font-weight: 800;
+  letter-spacing: -0.065em;
+  line-height: 0.91;
+  white-space: nowrap;
   text-transform: uppercase;
 }
 
-.eyebrow span {
+.festivalHeading span {
   width: 0.55rem;
   height: 0.55rem;
+  flex: 0 0 auto;
   background: var(--blue);
-}
-
-.intro h1 {
-  margin: 0;
-  font-family: var(--font-display), Arial, sans-serif;
-  font-size: var(--up-heading-hero);
-  letter-spacing: -0.085em;
-  line-height: 0.82;
-  text-transform: uppercase;
 }
 
 .introRule {
@@ -118,12 +112,8 @@
   align-self: stretch;
   min-height: 30rem;
   overflow: visible;
-  border: 1px solid rgb(9 9 9 / 12%);
-  background: rgb(255 255 255 / 12%);
-  box-shadow:
-    0 1.5rem 3.5rem rgb(16 20 25 / 5%),
-    inset 0 0 0 0.65rem rgb(255 255 255 / 22%),
-    inset 0 0 0 calc(0.65rem + 1px) rgb(9 9 9 / 8%);
+  background: #0b0b0a;
+  box-shadow: 0 1.5rem 3.5rem rgb(16 20 25 / 5%);
   animation: stage-in 900ms 140ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
@@ -406,9 +396,6 @@
     gap: 2rem;
   }
 
-  .intro h1 {
-    font-size: clamp(3rem, 4vw, 4.2rem);
-  }
 }
 
 @media (max-width: 900px) {
@@ -423,6 +410,10 @@
 
   .intro {
     align-self: start;
+  }
+
+  .festivalHeading {
+    font-size: clamp(3.4rem, 12vw, 6rem);
   }
 
   .emptyStage {
@@ -460,12 +451,8 @@
     gap: 3.25rem;
   }
 
-  .eyebrow {
+  .festivalHeading {
     margin-bottom: 2.5rem;
-  }
-
-  .intro h1 {
-    font-size: clamp(3.15rem, 15vw, 5rem);
   }
 
   .manifesto {
@@ -545,13 +532,6 @@
   }
 }
 
-/* Shared Home/About scale while retaining the festival-poster composition. */
-.intro h1 {
-  font-size: var(--up-heading-hero);
-  font-weight: 850;
-  line-height: 0.82;
-}
-
 .main,
 .footer {
   width: min(calc(100% - (2 * var(--up-page-gutter))), var(--up-content-max));
@@ -560,14 +540,6 @@
 .main {
   padding-top: clamp(7rem, 9.5vw, 9rem);
   padding-bottom: var(--up-section-space);
-}
-
-.eyebrow {
-  font-family: var(--font-body-mono), monospace;
-  font-size: var(--up-label);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1;
 }
 
 .detail dt,
@@ -600,5 +572,11 @@
   .main,
   .footer {
     width: min(calc(100% - (2 * var(--up-page-gutter))), var(--up-content-max));
+  }
+}
+
+@media (max-width: 600px) {
+  .festivalHeading {
+    font-size: clamp(3rem, 14.5vw, 4.8rem);
   }
 }

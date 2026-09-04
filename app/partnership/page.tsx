@@ -64,14 +64,6 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function PageMarker({ children }: { children: React.ReactNode }) {
-  return (
-    <p className={styles.pageMarker} aria-hidden="true">
-      {children}<span />
-    </p>
-  );
-}
-
 function OpportunityIcon({ type }: { type: (typeof opportunities)[number]["icon"] }) {
   return (
     <span className={`${styles.opportunityIcon} ${styles[type]}`} aria-hidden="true">
@@ -103,7 +95,6 @@ export default function PartnershipPage() {
               </article>
             ))}
           </div>
-          <PageMarker>01</PageMarker>
         </section>
 
         <section className={styles.opportunities} id="opportunities" aria-labelledby="opportunities-title">
@@ -124,7 +115,6 @@ export default function PartnershipPage() {
               </article>
             ))}
           </div>
-          <PageMarker>02</PageMarker>
         </section>
 
         <section className={styles.contact} id="contact" aria-labelledby="contact-title">
@@ -137,7 +127,6 @@ export default function PartnershipPage() {
             </p>
           </div>
           <PartnershipForm />
-          <PageMarker>03</PageMarker>
         </section>
       </main>
 

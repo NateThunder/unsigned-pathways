@@ -47,7 +47,7 @@ const questions = [
   {
     question: "What is the ACCESS Programme?",
     answer:
-      "ACCESS is a structured music and creativity workshop series for young people aged 11–18, commissioned through schools and organisations and designed to finish with a live or recorded sharing opportunity.",
+      "UP: ACCESS is a structured early intervention programme supporting young people aged 12–15 through music, sport and mentoring, designed to improve engagement, behaviour and confidence.",
   },
   {
     question: "How can an organisation partner with you?",

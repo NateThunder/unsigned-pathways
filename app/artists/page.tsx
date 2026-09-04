@@ -134,7 +134,6 @@ export default function ArtistsPage() {
                 </div>
                 <span>{index === 0 ? "Live / Community / Momentum" : "Sound / Performance / Identity / Direction"}</span>
               </div>
-              <p className={styles.pageMarker} aria-hidden="true">0{index + 3}</p>
             </section>
           ))}
         </div>
@@ -159,7 +158,6 @@ export default function ArtistsPage() {
             <p>Access: Free</p>
             <p>Community: On</p>
           </div>
-          <p className={styles.pageMarker} aria-hidden="true">05</p>
         </section>
 
         <section className={`${styles.stage} ${styles.finalStage}`} aria-labelledby="stage-03">
@@ -189,7 +187,6 @@ export default function ArtistsPage() {
             </div>
             <span>Share / Lead / Connect / Grow</span>
           </div>
-          <p className={styles.pageMarker} aria-hidden="true">06</p>
         </section>
 
         <section className={styles.eligibility} aria-labelledby="eligibility-title">
@@ -205,7 +202,6 @@ export default function ArtistsPage() {
             <li>Collectives</li>
           </ul>
           <p>16+<br />All genres<br />Scotland + UK<br />Free to access</p>
-          <p className={styles.pageMarker} aria-hidden="true">07</p>
         </section>
 
         <section className={styles.cta} id="apply" aria-labelledby="apply-title">
@@ -219,7 +215,6 @@ export default function ArtistsPage() {
             <p>Not ready yet?</p>
             <a href="mailto:hello@unsignedpathway.com?subject=Artist%20waiting%20list">Join the waiting list <span aria-hidden="true">↗</span></a>
           </div>
-          <p className={styles.pageMarker} aria-hidden="true">08</p>
         </section>
       </main>
 

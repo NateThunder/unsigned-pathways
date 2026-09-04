@@ -247,26 +247,6 @@
 .routeNode:nth-of-type(4) { left: 54%; top: 31%; }
 .routeNode:nth-of-type(5) { right: 0; top: 2%; }
 
-.pageMarker {
-  position: absolute;
-  right: 0;
-  bottom: 1.8rem;
-  margin: 0;
-  padding-right: 3.4rem;
-  font-size: 0.58rem;
-}
-
-.pageMarker::after {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  width: 2.5rem;
-  height: 1px;
-  background: currentColor;
-  content: "";
-  opacity: 0.45;
-}
-
 .overview {
   isolation: isolate;
   padding: clamp(4rem, 6vw, 7rem) 0 0;
@@ -553,12 +533,6 @@
   margin: 0;
 }
 
-.system .pageMarker {
-  bottom: auto;
-  top: 1rem;
-  right: 1rem;
-}
-
 .finalStage {
   margin-top: 2rem;
 }
@@ -589,7 +563,7 @@
   content: "+";
 }
 
-.eligibility > p:not(.pageMarker) {
+.eligibility > p {
   margin: 0;
   font-size: 0.6rem;
   line-height: 1.7;
@@ -1037,7 +1011,7 @@
 .stageLine,
 .outcomes,
 .eligibility ul,
-.eligibility > p:not(.pageMarker) {
+.eligibility > p {
   font-size: var(--up-body-small);
 }
 
