@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { IBM_Plex_Mono } from "next/font/google";
 import { Footer } from "../../components/Footer";
 import { PathwayChain } from "../../components/about/PathwayChain";
@@ -216,6 +217,42 @@ export default function AboutPage() {
                 </ul>
               </article>
             ))}
+          </div>
+          <Corners />
+        </section>
+
+        <section className={`${styles.section} ${styles.founder}`} aria-labelledby="founder-title">
+          <div className={styles.founderPortrait}>
+            <Image
+              src="/photos/fifi.jpg"
+              alt="Founder of Unsigned Pathway"
+              fill
+              sizes="(max-width: 800px) 100vw, 45vw"
+              className={styles.founderImage}
+            />
+          </div>
+          <div className={styles.founderCopy}>
+            <SectionLabel>About the founder</SectionLabel>
+            <h2 id="founder-title">Our Founder</h2>
+            <div className={styles.founderBody}>
+              <p>
+                Unsigned Pathway was founded by an artist with over 10 years of
+                trauma-informed experience working with young people in residential
+                schools, care and community settings, including those with complex
+                behavioural needs.
+              </p>
+              <p>
+                With a background in music and a Bachelor&apos;s degree in Popular Music,
+                the organisation is built on both professional experience and lived
+                understanding.
+              </p>
+              <p>
+                This combination of professional experience and lived understanding
+                allows Unsigned Pathway to connect with individuals in a way
+                traditional approaches often cannot — bridging the gap between lived
+                experience and real opportunity.
+              </p>
+            </div>
           </div>
           <Corners />
         </section>

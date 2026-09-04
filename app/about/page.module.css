@@ -277,6 +277,74 @@
   text-transform: none;
 }
 
+.founder {
+  display: grid;
+  min-height: min(58rem, 92svh);
+  background: var(--paper);
+  border-top: 1px solid var(--ink);
+  grid-template-columns: minmax(20rem, 0.9fr) minmax(0, 1.1fr);
+}
+
+.founderPortrait {
+  position: relative;
+  box-sizing: border-box;
+  width: 50%;
+  min-height: 0;
+  aspect-ratio: 620 / 930;
+  align-self: center;
+  justify-self: center;
+  margin-block: clamp(2rem, 4vw, 4rem);
+  overflow: hidden;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+}
+
+.founderImage {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.founderCopy {
+  display: flex;
+  padding: clamp(5rem, 8vw, 9rem) clamp(4rem, 7.5vw, 9rem);
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  animation: rise-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-range: entry 10% cover 35%;
+  animation-timeline: view();
+}
+
+.founderCopy h2 {
+  max-width: 8ch;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(3.8rem, 4.55vw, 5.6rem);
+  font-weight: 800;
+  letter-spacing: -0.065em;
+  line-height: 0.91;
+  text-transform: uppercase;
+}
+
+.founderBody {
+  width: min(100%, 38rem);
+  margin-top: clamp(3rem, 6vw, 6rem);
+  font-family: var(--font-about-mono), monospace;
+  font-size: clamp(0.74rem, 0.85vw, 0.95rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.45;
+}
+
+.founderBody p {
+  margin: 0;
+}
+
+.founderBody p + p {
+  margin-top: 1.5rem;
+}
+
 .programmes {
   padding: clamp(5rem, 8vw, 8rem) clamp(4rem, 7.5vw, 9rem) clamp(6rem, 9vw, 9rem);
   background: #090b0a;
@@ -498,6 +566,12 @@
   .programmeGrid {
     grid-template-columns: 1fr;
   }
+
+  .founder {
+    min-height: 0;
+    grid-template-columns: minmax(18rem, 0.8fr) minmax(0, 1.2fr);
+  }
+
 }
 
 @media (max-width: 800px) {
@@ -515,13 +589,19 @@
   .sideLabel {
     display: none;
   }
+
+  .founder {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
 }
 
 @media (max-width: 640px) {
   .hero,
   .focus,
   .identity,
-  .programmes {
+  .programmes,
+  .founderCopy {
     padding-right: 1.35rem;
     padding-left: 1.35rem;
   }
@@ -596,6 +676,19 @@
     font-size: clamp(2.8rem, 15vw, 4.8rem);
   }
 
+  .founderCopy {
+    padding-top: 4.5rem;
+    padding-bottom: 5rem;
+  }
+
+  .founderCopy h2 {
+    font-size: clamp(3rem, 14.5vw, 4.8rem);
+  }
+
+  .founderBody {
+    font-size: 0.82rem;
+  }
+
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -604,6 +697,7 @@
   .focusItem,
   .whoWeAre,
   .mission,
+  .founderCopy,
   .programme {
     opacity: 1;
     animation: none;
@@ -618,4 +712,5 @@
   .programme {
     transition: none;
   }
+
 }

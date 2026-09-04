@@ -63,11 +63,14 @@ export default function UpFestivalPage() {
 
           <div className={styles.emptyStage} aria-label="Three-dimensional festival stage">
             <EditorialModelScene
+              autoRotate
+              autoRotateSpeed={0.1}
               className={styles.stageCanvas}
+              dragToSpin
               modelPath="/3d/stage_optimized.glb"
-              particles
-              rotation={[-0.24, -0.5, 0.02]}
-              targetSize={2.6}
+              rotation={[-0.12, -0.34, 0]}
+              targetSize={3.15}
+              yawOnly
             />
           </div>
 
