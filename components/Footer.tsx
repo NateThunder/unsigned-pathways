@@ -1,4 +1,5 @@
 import { IBM_Plex_Mono } from "next/font/google";
+import { SocialLinks } from "./SocialLinks";
 import styles from "./footer.module.css";
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -61,6 +62,8 @@ export function Footer() {
             Registered in Scotland
             <br />
             No: SC887043
+            <br />
+            <a href="mailto:hello@unsignedpathway.com">hello@unsignedpathway.com</a>
           </p>
         </section>
 
@@ -76,9 +79,12 @@ export function Footer() {
       <div className={styles.utilityBar}>
         <p>&copy; 2026 Unsigned Pathway</p>
         <p>SC887043</p>
-        <a href="#home">
-          Back to top <span aria-hidden="true">&uarr;</span>
-        </a>
+        <div className={styles.utilityActions}>
+          <SocialLinks />
+          <a className={styles.backToTop} href="#home">
+            Back to top <span aria-hidden="true">&uarr;</span>
+          </a>
+        </div>
       </div>
     </footer>
   );

@@ -56,14 +56,6 @@
   background: var(--blue);
 }
 
-.introRule {
-  width: 4.75rem;
-  height: 1px;
-  margin: clamp(2.25rem, 3.4vw, 3.4rem) 0 1.75rem;
-  background: var(--blue);
-  animation: intro-in 760ms 80ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
 .summary {
   max-width: 19rem;
   margin: 0;
@@ -338,6 +330,7 @@
 
 .socials {
   justify-self: end;
+  gap: 0.55rem;
 }
 
 .corner {
@@ -537,7 +530,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .festivalHeading,
-  .introRule,
   .summary,
   .manifesto,
   .emptyStage,
@@ -604,6 +596,12 @@
 
 @media (max-width: 600px) {
   .festivalHeading {
-    font-size: clamp(3rem, 14.5vw, 4.8rem);
+    gap: clamp(0.45rem, 2vw, 0.75rem);
+    font-size: clamp(2.5rem, 11.75vw, 4.8rem);
+  }
+
+  .festivalHeading span {
+    width: clamp(0.4rem, 1.7vw, 0.55rem);
+    height: clamp(0.4rem, 1.7vw, 0.55rem);
   }
 }
