@@ -1,6 +1,7 @@
 import { AboutSection } from "../components/about/AboutSection";
 import { BenefitsSection } from "../components/benefits/BenefitsSection";
 import { Footer } from "../components/Footer";
+import { HomeCta } from "../components/HomeCta";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -26,6 +27,7 @@ export default function Home() {
         </section>
         <AboutSection />
         <BenefitsSection />
+        <HomeCta />
       </main>
       <Footer />
     </>

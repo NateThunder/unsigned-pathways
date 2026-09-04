@@ -1,5 +1,4 @@
 import { IBM_Plex_Mono } from "next/font/google";
-import { BenefitsScene } from "./BenefitsScene";
 import styles from "./benefits.module.css";
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -43,10 +42,6 @@ export function BenefitsSection() {
       id="benefits"
       aria-labelledby="benefits-title"
     >
-      <div className={styles.scene} aria-hidden="true">
-        <BenefitsScene />
-      </div>
-
       <span className={`${styles.corner} ${styles.topLeft}`} aria-hidden="true" />
       <span className={`${styles.corner} ${styles.topRight}`} aria-hidden="true" />
       <span className={`${styles.corner} ${styles.bottomLeft}`} aria-hidden="true" />

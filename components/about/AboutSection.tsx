@@ -13,31 +13,31 @@ const ibmPlexMono = IBM_Plex_Mono({
 const pathways = [
   {
     number: "01",
-    stage: "Entry",
-    title: "UP: Sessions",
+    stage: "Entry Pathway",
+    title: "Entry",
     description:
-      "Open live sessions where artists can test material, build confidence, and take a first step.",
+      "UP: Sessions are live open mic events for artists aged 16+, creating a space to perform, build confidence and gain real experience in front of an audience.",
   },
   {
     number: "02",
-    stage: "Development",
-    title: "UP: Hub",
+    stage: "Development Pathway",
+    title: "Development",
     description:
-      "Focused development that helps artists shape their sound, identity, and next moves.",
+      "UP: Hub supports selected artists from our live sessions through structured development, helping them refine their sound, build their identity and move towards professional opportunities.",
   },
   {
     number: "03",
-    stage: "Access",
-    title: "UP: Access",
+    stage: "Platform Pathway",
+    title: "Platform",
     description:
-      "Opportunities, showcases, and support that connect artists with wider audiences.",
+      "UP: Festival connects artists to wider audiences, industry exposure and further opportunities through live showcases and events.",
   },
   {
     number: "04",
-    stage: "Partnership",
-    title: "UP: Partnership",
+    stage: "Mentoring Pathway",
+    title: "Mentoring",
     description:
-      "Collaborations with venues, organisations, and partners to build lasting impact.",
+      "UP: Mentoring is where artists step into leadership, supporting others while continuing to grow, develop and strengthen the community around them.",
   },
 ] as const;
 
@@ -59,26 +59,25 @@ export function AboutSection() {
               <br />
               pathways.
               <br />
-              One artist-led
-              <br />
-              ecosystem
+              One ecosystem
             </h2>
           </div>
 
           <div className={styles.copySide}>
             <p>
-              Unsigned Pathway is a practical, artist-led route for performers
-              to develop their craft, reach real audiences, and grow into
-              sustainable careers.
+              Unsigned Pathway is an artist-led, community-focused platform supporting 
+              emerging artists and young people through structured programmes, 
+              live performance and real-world opportunities.
             </p>
             <p>
-              We combine creative guidance, real-world experience, and industry
-              connections to help artists build confidence, clarity, and
-              momentum.
+              Built on real-life experience, we create practical pathways that help 
+              people develop their skills, build confidence and gain meaningful 
+              experience within music and the wider creative industries.
             </p>
             <p>
-              Four pathways. One ecosystem. Designed to meet you where you are,
-              and take you further.
+              Our aim is simple: to make progression clearer, opportunities 
+              more accessible and give artists and young people the support 
+              they need to move forward.
             </p>
             <AboutScrambleLink />
           </div>

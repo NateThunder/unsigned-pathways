@@ -4,9 +4,9 @@ import { EditorialModelScene } from "../../components/three/EditorialModelScene"
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "UP Festival | Unsigned Pathway",
+  title: "UP:Festival | Unsigned Pathway",
   description:
-    "UP Festival brings emerging talent and communities together through live music, creativity and culture.",
+    "UP:Festival brings emerging talent and communities together through live music, creativity and culture.",
 };
 
 const festivalDetails = [
@@ -36,12 +36,12 @@ export default function UpFestivalPage() {
   return (
     <div className={styles.page}>
       <main className={styles.main} id="home">
-        <section className={styles.poster} id="festival" aria-label="UP Festival">
+        <section className={styles.poster} id="festival" aria-label="UP:Festival">
           <div className={styles.intro}>
-            <p className={styles.eyebrow}>
+            <h1 className={styles.festivalHeading}>
               <span aria-hidden="true" />
-              UP Festival
-            </p>
+              UP:Festival
+            </h1>
 
             <div className={styles.introRule} aria-hidden="true" />
             <p className={styles.summary}>
@@ -65,6 +65,7 @@ export default function UpFestivalPage() {
             <EditorialModelScene
               className={styles.stageCanvas}
               modelPath="/3d/stage_optimized.glb"
+              particles
               rotation={[-0.24, -0.5, 0.02]}
               targetSize={2.6}
             />

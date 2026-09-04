@@ -178,8 +178,9 @@
 .pathway h3 {
   width: max-content;
   max-width: 100%;
+  min-height: 1.9em;
   margin: 0;
-  font-size: clamp(1.5rem, 1.8vw, 2.2rem);
+  font-size: clamp(1.2rem, 1.55vw, 1.85rem);
   font-weight: 800;
   letter-spacing: -0.055em;
   line-height: 0.95;
@@ -187,7 +188,7 @@
 }
 
 .routeSpace {
-  height: clamp(3.6rem, 6.6vh, 5.5rem);
+  height: clamp(2.6rem, 4.8vh, 4rem);
 }
 
 .description {
@@ -199,7 +200,7 @@
 
 .route {
   position: absolute;
-  top: clamp(7.15rem, 12.2vh, 9.6rem);
+  top: clamp(6.6rem, 10.4vh, 8.25rem);
   left: clamp(1.5rem, 2.8vw, 3.2rem);
   z-index: 3;
   width: calc(100% - clamp(3rem, 5.6vw, 6.4rem));
@@ -412,6 +413,7 @@
   }
 
   .pathway h3 {
+    min-height: 0;
     font-size: clamp(2rem, 10vw, 2.8rem);
   }
 

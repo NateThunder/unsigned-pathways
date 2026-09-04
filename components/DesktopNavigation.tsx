@@ -14,7 +14,7 @@ const links = [
   ["Artists", "/artists"],
   ["Access Programme", "/access"],
   ["Partnership", "/partnership"],
-  ["UP Festival", "/up-festival"],
+  ["UP:Festival", "/up-festival"],
 ] as const;
 
 const moreLinks = [

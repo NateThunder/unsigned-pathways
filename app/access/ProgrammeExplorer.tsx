@@ -1,35 +1,39 @@
 "use client";
 
 import { useState } from "react";
-import { EditorialModelScene } from "../../components/three/EditorialModelScene";
+import { ProgrammeField } from "./ProgrammeField";
 import styles from "./page.module.css";
 
 const stages = [
   {
     number: "01",
-    title: "Discover",
-    caption: "Try things.",
-    body: "A welcoming first session for exploring sound, ideas and creative confidence.",
+    title: "Music",
+    caption: "Create and express.",
+    body: "Artist-led music sessions give young people a practical route into confidence, self-expression and communication.",
   },
   {
     number: "02",
-    title: "Develop",
-    caption: "Build skills.",
-    body: "Artist-led sessions turn early ideas into practical skills, stronger choices and a clear direction.",
+    title: "Sport",
+    caption: "Move and connect.",
+    body: "Structured sport sessions support emotional regulation, teamwork and positive engagement through shared activity.",
   },
   {
     number: "03",
-    title: "Share",
-    caption: "Make something real.",
-    body: "Young people finish with something they can perform, record or share on their own terms.",
+    title: "Mentoring",
+    caption: "Reflect and progress.",
+    body: "Consistent mentoring rooted in lived experience helps young people build confidence, make stronger choices and track progress.",
   },
 ] as const;
 
 export function ProgrammeExplorer() {
   const [activeStage, setActiveStage] = useState(1);
+  const [hoveredStage, setHoveredStage] = useState<number | null>(null);
+  const [focusedStage, setFocusedStage] = useState<number | null>(null);
+  const displayedStage = hoveredStage ?? focusedStage ?? activeStage;
 
   return (
     <div className={styles.explorer}>
+      <ProgrammeField stage={displayedStage} />
       <ol className={styles.stageList}>
         {stages.map((stage, index) => (
           <li className={styles.stageItem} key={stage.number}>
@@ -38,6 +42,10 @@ export function ProgrammeExplorer() {
               type="button"
               aria-pressed={activeStage === index}
               onClick={() => setActiveStage(index)}
+              onMouseEnter={() => setHoveredStage(index)}
+              onMouseLeave={() => setHoveredStage(null)}
+              onFocus={() => setFocusedStage(index)}
+              onBlur={() => setFocusedStage(null)}
             >
               <span className={styles.stageNumber}>{stage.number}</span>
               <strong>{stage.title}</strong>
@@ -48,30 +56,8 @@ export function ProgrammeExplorer() {
         ))}
       </ol>
       <div className={styles.explorerReadout} aria-live="polite">
-        <span>{stages[activeStage].number} / {stages[activeStage].title}</span>
-        <p>{stages[activeStage].body}</p>
-      </div>
-    </div>
-  );
-}
-
-export function ThemeMixer() {
-  return (
-    <div className={styles.mixer}>
-      <div
-        className={styles.mixerControls}
-        role="img"
-        aria-label="Blue studio dials viewed from above"
-      >
-        <div className={styles.mixerModel} aria-hidden="true">
-          <EditorialModelScene
-            animate={false}
-            modelPath="/3d/blue_dials_optimized.glb"
-            preserveMaterials
-            rotation={[Math.PI / 2, 0, 0]}
-            targetSize={9.36}
-          />
-        </div>
+        <span>{stages[displayedStage].number} / {stages[displayedStage].title}</span>
+        <p>{stages[displayedStage].body}</p>
       </div>
     </div>
   );

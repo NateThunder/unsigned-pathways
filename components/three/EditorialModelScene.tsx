@@ -1,7 +1,7 @@
 "use client";
 
 import { useGLTF } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { useSceneVisibility } from "./useSceneVisibility";
@@ -10,6 +10,7 @@ type EditorialModelSceneProps = {
   animate?: boolean;
   className?: string;
   modelPath: string;
+  particles?: boolean;
   preserveMaterials?: boolean;
   rotation?: [number, number, number];
   targetSize?: number;
@@ -22,6 +23,79 @@ type EditorialModelProps = {
   rotation: [number, number, number];
   targetSize: number;
 };
+
+function BackgroundParticles({ motionAllowed }: { motionAllowed: boolean }) {
+  const points = useRef<THREE.Points>(null);
+  const tap = useRef({ x: 0, y: 0, strength: 0 });
+  const { gl } = useThree();
+  const positions = useMemo(() => {
+    const values = new Float32Array(150 * 3);
+
+    for (let index = 0; index < 150; index += 1) {
+      const offset = index * 3;
+      const seed = index + 1;
+      values[offset] = (((seed * 47) % 101) / 100 - 0.5) * 8.5;
+      values[offset + 1] = (((seed * 73) % 103) / 102 - 0.5) * 5.8;
+      values[offset + 2] = -1.6 - ((seed * 29) % 100) / 80;
+    }
+
+    return values;
+  }, []);
+
+  useEffect(() => {
+    const canvas = gl.domElement;
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!motionAllowed) return;
+      const bounds = canvas.getBoundingClientRect();
+      tap.current = {
+        x: ((event.clientX - bounds.left) / bounds.width - 0.5) * 0.7,
+        y: -((event.clientY - bounds.top) / bounds.height - 0.5) * 0.7,
+        strength: 1,
+      };
+    };
+
+    canvas.addEventListener("pointerdown", handlePointerDown);
+    return () => canvas.removeEventListener("pointerdown", handlePointerDown);
+  }, [gl, motionAllowed]);
+
+  useFrame(({ clock, pointer }, delta) => {
+    if (!points.current || !motionAllowed) return;
+    const frameDelta = Math.min(delta, 1 / 30);
+    const tapState = tap.current;
+    const tapEase = tapState.strength * tapState.strength;
+
+    points.current.rotation.z = clock.elapsedTime * 0.008 + tapEase * 0.08;
+    points.current.position.x = THREE.MathUtils.damp(
+      points.current.position.x,
+      pointer.x * 0.24 + tapState.x * tapEase,
+      5,
+      frameDelta,
+    );
+    points.current.position.y = THREE.MathUtils.damp(
+      points.current.position.y,
+      pointer.y * 0.18 + tapState.y * tapEase + Math.sin(clock.elapsedTime * 0.18) * 0.035,
+      5,
+      frameDelta,
+    );
+    points.current.scale.setScalar(1 + tapEase * 0.16);
+    tapState.strength = Math.max(0, tapState.strength - frameDelta * 1.8);
+  });
+
+  return (
+    <points ref={points}>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+      </bufferGeometry>
+      <pointsMaterial
+        color="#f4f3ee"
+        opacity={0.72}
+        size={0.025}
+        sizeAttenuation
+        transparent
+      />
+    </points>
+  );
+}
 
 function EditorialModel({
   modelPath,
@@ -122,6 +196,7 @@ export function EditorialModelScene({
   animate = true,
   className,
   modelPath,
+  particles = false,
   preserveMaterials = false,
   rotation = [-0.18, -0.35, 0.06],
   targetSize = 4.6,
@@ -156,6 +231,7 @@ export function EditorialModelScene({
             position={[-4, 7, 8]}
           />
           <directionalLight color="#2f64ff" intensity={0.8} position={[5, 1, 5]} />
+          {particles && <BackgroundParticles motionAllowed={animate && motionAllowed} />}
           <Suspense fallback={null}>
             <EditorialModel
               modelPath={modelPath}
