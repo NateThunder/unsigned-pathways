@@ -16,9 +16,9 @@ const festivalDetails = [
 ] as const;
 
 const festivalLinks = [
-  { number: "01", label: "Explore the festival", href: "#festival" },
-  { number: "02", label: "View artists", href: "/artists" },
-  { number: "03", label: "Get updates", href: "#updates" },
+  { label: "Explore the festival", href: "#festival" },
+  { label: "View artists", href: "/artists" },
+  { label: "Get updates", href: "#updates" },
 ] as const;
 
 function Spark() {
@@ -101,9 +101,7 @@ export default function UpFestivalPage() {
 
         <nav className={styles.linkRail} aria-label="Festival links">
           {festivalLinks.map((link) => (
-            <Link href={link.href} key={link.number}>
-              <span className={styles.linkNumber}>[{link.number}]</span>
-              <span className={styles.linkRule} aria-hidden="true" />
+            <Link href={link.href} key={link.href}>
               <strong>{link.label}</strong>
               <span className={styles.linkArrow} aria-hidden="true">&#8599;</span>
             </Link>
