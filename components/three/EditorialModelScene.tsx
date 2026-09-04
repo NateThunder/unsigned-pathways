@@ -8,20 +8,28 @@ import { useSceneVisibility } from "./useSceneVisibility";
 
 type EditorialModelSceneProps = {
   animate?: boolean;
+  autoRotate?: boolean;
+  autoRotateSpeed?: number;
   className?: string;
+  dragToSpin?: boolean;
   modelPath: string;
   particles?: boolean;
   preserveMaterials?: boolean;
   rotation?: [number, number, number];
   targetSize?: number;
+  yawOnly?: boolean;
 };
 
 type EditorialModelProps = {
+  autoRotate: boolean;
+  autoRotateSpeed: number;
+  dragToSpin: boolean;
   modelPath: string;
   motionAllowed: boolean;
   preserveMaterials: boolean;
   rotation: [number, number, number];
   targetSize: number;
+  yawOnly: boolean;
 };
 
 function BackgroundParticles({ motionAllowed }: { motionAllowed: boolean }) {
@@ -98,14 +106,22 @@ function BackgroundParticles({ motionAllowed }: { motionAllowed: boolean }) {
 }
 
 function EditorialModel({
+  autoRotate,
+  autoRotateSpeed,
+  dragToSpin,
   modelPath,
   motionAllowed,
   preserveMaterials,
   rotation,
   targetSize,
+  yawOnly,
 }: EditorialModelProps) {
   const { scene } = useGLTF(modelPath);
+  const { gl } = useThree();
   const group = useRef<THREE.Group>(null);
+  const yaw = useRef(rotation[1]);
+  const spinBoost = useRef(0);
+  const drag = useRef({ active: false, pointerId: -1, lastX: 0, lastTime: 0 });
 
   const model = useMemo(() => {
     const clone = scene.clone(true);
@@ -166,21 +182,78 @@ function EditorialModel({
     [model],
   );
 
+  useEffect(() => {
+    if (!dragToSpin || !motionAllowed) return;
+
+    const canvas = gl.domElement;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      drag.current = {
+        active: true,
+        pointerId: event.pointerId,
+        lastX: event.clientX,
+        lastTime: event.timeStamp,
+      };
+      canvas.setPointerCapture(event.pointerId);
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      const state = drag.current;
+      if (!state.active || state.pointerId !== event.pointerId) return;
+
+      const deltaX = event.clientX - state.lastX;
+      const elapsed = Math.max((event.timeStamp - state.lastTime) / 1000, 1 / 120);
+      const dragRotation = deltaX * 0.008;
+
+      yaw.current += dragRotation;
+      spinBoost.current = THREE.MathUtils.clamp(dragRotation / elapsed, -7, 7);
+      state.lastX = event.clientX;
+      state.lastTime = event.timeStamp;
+    };
+
+    const stopDragging = (event: PointerEvent) => {
+      if (drag.current.pointerId !== event.pointerId) return;
+      drag.current.active = false;
+      drag.current.pointerId = -1;
+      if (canvas.hasPointerCapture(event.pointerId)) {
+        canvas.releasePointerCapture(event.pointerId);
+      }
+    };
+
+    canvas.addEventListener("pointerdown", handlePointerDown);
+    canvas.addEventListener("pointermove", handlePointerMove);
+    canvas.addEventListener("pointerup", stopDragging);
+    canvas.addEventListener("pointercancel", stopDragging);
+
+    return () => {
+      canvas.removeEventListener("pointerdown", handlePointerDown);
+      canvas.removeEventListener("pointermove", handlePointerMove);
+      canvas.removeEventListener("pointerup", stopDragging);
+      canvas.removeEventListener("pointercancel", stopDragging);
+    };
+  }, [dragToSpin, gl, motionAllowed]);
+
   useFrame(({ clock, pointer }, delta) => {
     const object = group.current;
     if (!object) return;
 
     const frameDelta = Math.min(delta, 1 / 30);
-    const targetX = rotation[0] + (motionAllowed ? pointer.y * 0.08 : 0);
-    const targetY =
-      rotation[1] +
-      (motionAllowed
-        ? pointer.x * 0.12 + Math.sin(clock.elapsedTime * 0.42) * 0.08
-        : 0);
+    const targetX = rotation[0] + (motionAllowed && !yawOnly ? pointer.y * 0.08 : 0);
+    const targetY = rotation[1] + (motionAllowed
+      ? pointer.x * 0.12 + Math.sin(clock.elapsedTime * 0.42) * 0.08
+      : 0);
+
+    if (motionAllowed && autoRotate) {
+      yaw.current += (autoRotateSpeed + spinBoost.current) * frameDelta;
+      spinBoost.current = THREE.MathUtils.damp(spinBoost.current, 0, 1.35, frameDelta);
+      object.rotation.y = yaw.current;
+    } else {
+      object.rotation.y = THREE.MathUtils.damp(object.rotation.y, targetY, 4, frameDelta);
+    }
 
     object.rotation.x = THREE.MathUtils.damp(object.rotation.x, targetX, 4, frameDelta);
-    object.rotation.y = THREE.MathUtils.damp(object.rotation.y, targetY, 4, frameDelta);
-    object.position.y = motionAllowed
+    object.rotation.z = THREE.MathUtils.damp(object.rotation.z, rotation[2], 4, frameDelta);
+    object.position.y = motionAllowed && !yawOnly
       ? Math.sin(clock.elapsedTime * 0.68) * 0.055
       : 0;
   });
@@ -194,12 +267,16 @@ function EditorialModel({
 
 export function EditorialModelScene({
   animate = true,
+  autoRotate = false,
+  autoRotateSpeed = 0.12,
   className,
+  dragToSpin = false,
   modelPath,
   particles = false,
   preserveMaterials = false,
   rotation = [-0.18, -0.35, 0.06],
   targetSize = 4.6,
+  yawOnly = false,
 }: EditorialModelSceneProps) {
   const [motionAllowed, setMotionAllowed] = useState(true);
   const { containerRef, shouldMount, isActive } = useSceneVisibility("200px 0px");
@@ -234,11 +311,15 @@ export function EditorialModelScene({
           {particles && <BackgroundParticles motionAllowed={animate && motionAllowed} />}
           <Suspense fallback={null}>
             <EditorialModel
+              autoRotate={autoRotate}
+              autoRotateSpeed={autoRotateSpeed}
+              dragToSpin={dragToSpin}
               modelPath={modelPath}
               motionAllowed={animate && motionAllowed}
               preserveMaterials={preserveMaterials}
               rotation={rotation}
               targetSize={targetSize}
+              yawOnly={yawOnly}
             />
           </Suspense>
         </Canvas>
