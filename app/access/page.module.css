@@ -756,17 +756,7 @@
   color: inherit;
 }
 
-.formActions span {
-  display: inline-block;
-  transition: transform 180ms ease;
-}
 
-.formActions button:hover span,
-.formActions button:focus-visible span,
-.formActions a:hover span,
-.formActions a:focus-visible span {
-  transform: translate(0.18rem, -0.18rem);
-}
 
 .noise {
   position: fixed;
@@ -928,10 +918,6 @@
 }
 
 @media (max-width: 560px) {
-  .hero h1 {
-    font-size: clamp(3rem, 14vw, 4.6rem);
-  }
-
   .heroActions,
   .formActions {
     align-items: flex-start;
@@ -1024,8 +1010,7 @@
   .primaryAction span,
   .primaryAction,
   .secondaryAction span,
-  .stageNode,
-  .formActions span {
+  .stageNode {
     transition: none;
   }
 }
@@ -1123,5 +1108,21 @@
   .enquiry {
     padding-right: 0;
     padding-left: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .heroCopy {
+    min-width: 0;
+  }
+
+  .hero h1 {
+    /* Keep the longest word within the mobile gutters. */
+    font-size: clamp(2rem, 11vw, 4rem);
+    line-height: 0.91;
   }
 }

@@ -1,0 +1,13 @@
+.label {
+  position: relative;
+  display: inline-grid;
+}
+
+.sizer {
+  opacity: 0;
+}
+
+.text {
+  position: absolute;
+  inset: 0;
+}

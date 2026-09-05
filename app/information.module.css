@@ -201,11 +201,6 @@
   transition: color 180ms ease, padding 180ms ease;
 }
 
-.contactLinks a::after {
-  color: var(--blue);
-  content: "↗";
-}
-
 .contactLinks a:hover,
 .contactLinks a:focus-visible {
   padding-left: 0.4rem;
@@ -554,5 +549,99 @@
   .contactSection {
     padding-right: var(--up-page-gutter);
     padding-left: var(--up-page-gutter);
+  }
+}
+
+@media (max-width: 720px) {
+  .contactSection {
+    padding-bottom: 0;
+  }
+
+  .formWrap {
+    margin-inline: calc(-1 * var(--up-page-gutter));
+    padding: var(--up-section-space) var(--up-page-gutter);
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .formMeta,
+  .field {
+    border-bottom-color: rgb(11 11 10 / 28%);
+  }
+
+  .field:focus-within {
+    border-bottom-color: var(--blue);
+  }
+
+  .field span,
+  .consent,
+  .formMeta span:last-child {
+    color: var(--muted);
+  }
+
+  .field input,
+  .field select,
+  .field textarea,
+  .submitButton,
+  .submitButton:not(:disabled) {
+    color: var(--ink);
+  }
+
+  .field select {
+    background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+  }
+
+  .field select option {
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .consent input:checked {
+    box-shadow: inset 0 0 0 2px #fff;
+  }
+
+  .submitButton,
+  .submitButton:not(:disabled) {
+    border-color: var(--ink);
+  }
+
+  .submitButton:not(:disabled):hover,
+  .submitButton:not(:disabled):focus-visible {
+    border-color: var(--blue);
+    color: var(--paper);
+  }
+}
+
+/* Keep the FAQ masthead and accordion on one editorial column. */
+.faqSection {
+  padding-top: clamp(8rem, 10.55vw, 10.125rem);
+  gap: 3rem;
+}
+
+.faqTitle {
+  width: min(100%, 62rem);
+  max-width: none;
+  justify-self: center;
+  font-size: clamp(5.75rem, 7.55vw, 7.25rem);
+}
+
+@media (max-width: 900px) {
+  .faqSection {
+    padding-top: 7.5rem;
+  }
+
+  .faqTitle {
+    font-size: clamp(3.4rem, 12vw, 6rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .faqSection {
+    padding-top: 6.5rem;
+    gap: 2.75rem;
+  }
+
+  .faqTitle {
+    font-size: clamp(3rem, 14.5vw, 4.8rem);
   }
 }

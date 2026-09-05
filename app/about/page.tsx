@@ -224,18 +224,19 @@ export default function AboutPage() {
           <div className={styles.founderPortrait}>
             <Image
               src="/photos/fifi.jpg"
-              alt="Founder of Unsigned Pathway"
+              alt="Fifidiny Greasley, founder of Unsigned Pathway"
               fill
               sizes="(max-width: 800px) 100vw, 45vw"
               className={styles.founderImage}
             />
           </div>
           <div className={styles.founderCopy}>
-            <SectionLabel>About the founder</SectionLabel>
+            <SectionLabel>The people behind the pathway</SectionLabel>
             <h2 id="founder-title">Our Founder</h2>
+            <p className={styles.founderName}>Fifidiny Greasley</p>
             <div className={styles.founderBody}>
               <p>
-                Unsigned Pathway was founded by an artist with over 10 years of
+                Unsigned Pathway was founded by Fifidiny Greasley, an artist with over 10 years of
                 trauma-informed experience working with young people in residential
                 schools, care and community settings, including those with complex
                 behavioural needs.
@@ -256,6 +257,75 @@ export default function AboutPage() {
           <Corners />
         </section>
 
+        <section className={`${styles.section} ${styles.team}`} aria-labelledby="team-title">
+          <h2 id="team-title" className={styles.teamTitle}>The team</h2>
+          <div className={styles.teamGrid}>
+            <article className={styles.teamMember} aria-labelledby="sean-title">
+              <div className={styles.teamPortrait}>
+                <Image
+                  src="/photos/Sean.jpg"
+                  alt="Sean McLaughlin"
+                  fill
+                  sizes="(max-width: 600px) 38vw, (max-width: 1000px) 32vw, 20vw"
+                  className={styles.teamImage}
+                />
+              </div>
+              <div className={styles.teamCopy}>
+              <p className={styles.teamExpertise}>Music education &amp;<br /> creative practice</p>
+              <h3 id="sean-title">Séan<br />McLaughlin</h3>
+              <div className={styles.teamBody}>
+                <p>
+                  Séan brings extensive experience in music education, creative
+                  practice and community music. His work at the University of the
+                  Highlands and Islands spans teaching, programme leadership and
+                  the supervision of postgraduate creative research.
+                </p>
+                <details className={styles.teamProfile}>
+                  <summary>Profile</summary>
+                  <p>
+                  As a director of Make Music Tayside, he supports access to music
+                  through free tuition, musical instruments and community
+                  workshops, helping more people take part in making music.
+                  </p>
+                </details>
+              </div>
+              </div>
+            </article>
+            <article className={styles.teamMember} aria-labelledby="nathan-title">
+              <div className={styles.teamPortrait}>
+                <Image
+                  src="/photos/Nathan Somevi.png"
+                  alt="Nathan Somevi"
+                  fill
+                  sizes="(max-width: 600px) 38vw, (max-width: 1000px) 32vw, 20vw"
+                  className={styles.teamImage}
+                />
+              </div>
+              <div className={styles.teamCopy}>
+              <p className={styles.teamExpertise}>Music technology &amp;<br /> creative development</p>
+              <h3 id="nathan-title">Nathan<br />Somevi</h3>
+              <div className={styles.teamBody}>
+                <p>
+                  Nathan is an independent musician, composer, creative
+                  technologist and software engineer. A jazz guitarist performing
+                  across Scotland, he brings first-hand experience of building an
+                  independent music career, delivering commissioned work and
+                  collaborating with arts organisations.
+                </p>
+                <details className={styles.teamProfile}>
+                  <summary>Profile</summary>
+                  <p>
+                  Alongside his music, Nathan designs and builds digital platforms
+                  for artists, businesses and community organisations, combining
+                  creative experience with skills in technology, project delivery
+                  and digital strategy.
+                  </p>
+                </details>
+              </div>
+              </div>
+            </article>
+          </div>
+        </section>
       </main>
 
       <Footer />

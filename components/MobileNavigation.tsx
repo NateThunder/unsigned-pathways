@@ -11,23 +11,18 @@ const links = [
   ["Access Programme", "/access"],
   ["Partnership", "/partnership"],
   ["UP:Festival", "/up-festival"],
-] as const;
-
-const moreLinks = [
   ["FAQ", "/faq"],
   ["Contact", "/contact"],
 ] as const;
 
 export function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isMoreOpen, setIsMoreOpen] = useState(false);
 
   useEffect(() => {
     if (!isOpen) return;
 
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setIsMoreOpen(false);
         setIsOpen(false);
       }
     };
@@ -42,7 +37,6 @@ export function MobileNavigation() {
   }, [isOpen]);
 
   const closeMenu = () => {
-    setIsMoreOpen(false);
     setIsOpen(false);
   };
 
@@ -55,7 +49,6 @@ export function MobileNavigation() {
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
         onClick={() => {
-          if (isOpen) setIsMoreOpen(false);
           setIsOpen((open) => !open);
         }}
       >
@@ -68,42 +61,14 @@ export function MobileNavigation() {
         id="mobile-menu"
         aria-hidden={!isOpen}
       >
+        <div className={styles.mobileMenuGrain} aria-hidden="true" />
         <nav aria-label="Mobile navigation">
           {links.map(([label, href]) => (
             <Link key={href} href={href} onClick={closeMenu} tabIndex={isOpen ? 0 : -1}>
               {label}
             </Link>
           ))}
-          <div className={styles.mobileMore}>
-            <button
-              type="button"
-              aria-expanded={isMoreOpen}
-              aria-controls="mobile-more-navigation"
-              onClick={() => setIsMoreOpen((open) => !open)}
-              tabIndex={isOpen ? 0 : -1}
-            >
-              <span>More</span>
-              <span aria-hidden="true">{isMoreOpen ? "−" : "+"}</span>
-            </button>
-            <div
-              className={`${styles.mobileMorePanel} ${isMoreOpen ? styles.mobileMorePanelOpen : ""}`}
-              id="mobile-more-navigation"
-              aria-hidden={!isMoreOpen}
-            >
-              <div>
-                {moreLinks.map(([label, href]) => (
-                  <Link
-                    key={href}
-                    href={href}
-                    onClick={closeMenu}
-                    tabIndex={isOpen && isMoreOpen ? 0 : -1}
-                  >
-                    {label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
+
         </nav>
       </div>
     </div>

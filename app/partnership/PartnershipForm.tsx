@@ -27,8 +27,7 @@ export function PartnershipForm() {
         <textarea name="interest" rows={3} />
       </label>
       <button type="submit" aria-disabled="true">
-        <span>Send message</span>
-        <span aria-hidden="true">&#8599;</span>
+        Send message
       </button>
     </form>
   );

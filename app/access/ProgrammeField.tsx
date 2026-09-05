@@ -114,9 +114,10 @@ function Signal({ stage, motionAllowed, pointer }: SignalProps) {
         </bufferGeometry>
         <pointsMaterial
           color="#0759c9"
-          opacity={0.92}
-          size={0.072}
+          opacity={1}
+          size={2.4}
           sizeAttenuation={false}
+          toneMapped={false}
           transparent
           depthWrite={false}
         />

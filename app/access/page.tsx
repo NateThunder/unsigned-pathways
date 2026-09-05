@@ -83,7 +83,7 @@ export default function AccessPage() {
             </p>
             <div className={styles.heroActions}>
               <a className={styles.primaryAction} href="#enquire">
-                Enquire about access <span aria-hidden="true">&#8599;</span>
+                Enquire about access
               </a>
               <a className={styles.secondaryAction} href="#programme">
                 Explore the programme <span aria-hidden="true">&#8595;</span>

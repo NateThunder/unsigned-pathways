@@ -1,3 +1,4 @@
+import { ScrambleLabel } from "../../components/ScrambleLabel";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "../../components/Footer";
@@ -52,15 +53,14 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ArrowLink({ href, children, inverted = false }: {
+function ActionLink({ href, children, inverted = false }: {
   href: string;
-  children: React.ReactNode;
+  children: string;
   inverted?: boolean;
 }) {
   return (
     <Link className={`${styles.arrowLink} ${inverted ? styles.arrowLinkInverted : ""}`} href={href}>
-      <span>{children}</span>
-      <span aria-hidden="true">↗</span>
+      {inverted ? children : <ScrambleLabel>{children}</ScrambleLabel>}
     </Link>
   );
 }
@@ -86,7 +86,7 @@ export default function ArtistsPage() {
                 perfect CV. Start by making music. Progression happens when you&apos;re ready.
               </p>
               <div>
-                <ArrowLink href="#apply" inverted>Apply as an artist</ArrowLink>
+                <ActionLink href="#apply" inverted>Apply as an artist</ActionLink>
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@ export default function ArtistsPage() {
                 <h2 id={`stage-${stage.number}`}>{stage.title}</h2>
                 <p className={styles.stageLine}>{stage.line}</p>
                 <p className={styles.stageBody}>{stage.body}</p>
-                <ArrowLink href="#apply">{stage.action}</ArrowLink>
+                <ActionLink href="#apply">{stage.action}</ActionLink>
               </div>
               <ol className={styles.outcomes}>
                 {stage.outcomes.map((outcome, outcomeIndex) => (
@@ -167,7 +167,7 @@ export default function ArtistsPage() {
             <h2 id="stage-03">UP: Mentoring</h2>
             <p className={styles.stageLine}>Grow by giving back.</p>
             <p className={styles.stageBody}>{stages[2].body}</p>
-            <ArrowLink href="#apply">Register interest</ArrowLink>
+            <ActionLink href="#apply">Register interest</ActionLink>
           </div>
           <ol className={styles.outcomes}>
             {stages[2].outcomes.map((outcome, index) => (
@@ -210,10 +210,10 @@ export default function ArtistsPage() {
             <h2 id="apply-title">Ready to take<br />the first step?</h2>
             <small>Start with UP: Sessions.</small>
           </div>
-          <ArrowLink href="mailto:hello@unsignedpathway.com" inverted>Apply as an artist</ArrowLink>
+          <ActionLink href="mailto:hello@unsignedpathway.com" inverted>Apply as an artist</ActionLink>
           <div className={styles.waitlist}>
             <p>Not ready yet?</p>
-            <a href="mailto:hello@unsignedpathway.com?subject=Artist%20waiting%20list">Join the waiting list <span aria-hidden="true">↗</span></a>
+            <a href="mailto:hello@unsignedpathway.com?subject=Artist%20waiting%20list"><ScrambleLabel>Join the waiting list</ScrambleLabel></a>
           </div>
         </section>
       </main>

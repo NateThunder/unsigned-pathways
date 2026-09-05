@@ -94,19 +94,7 @@
   text-transform: uppercase;
 }
 
-.arrowLink > span:last-child,
-.textLink span,
-.waitlist a span {
-  display: inline-block;
-  transition: transform 180ms ease;
-}
 
-.arrowLink:hover > span:last-child,
-.arrowLink:focus-visible > span:last-child,
-.waitlist a:hover span,
-.waitlist a:focus-visible span {
-  transform: translate(0.18rem, -0.18rem);
-}
 
 .arrowLinkInverted {
   padding: 1rem 1.25rem;
@@ -641,9 +629,6 @@
   text-transform: uppercase;
 }
 
-.waitlist a span {
-  margin-left: 0.7rem;
-}
 
 .noise {
   position: fixed;

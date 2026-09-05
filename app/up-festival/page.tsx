@@ -1,3 +1,4 @@
+import { ScrambleLabel } from "../../components/ScrambleLabel";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SocialLinks } from "../../components/SocialLinks";
@@ -40,7 +41,6 @@ export default function UpFestivalPage() {
         <section className={styles.poster} id="festival" aria-label="UP:Festival">
           <div className={styles.intro}>
             <h1 className={styles.festivalHeading}>
-              <span aria-hidden="true" />
               UP:Festival
             </h1>
 
@@ -92,7 +92,7 @@ export default function UpFestivalPage() {
 
             <div className={styles.updates} id="updates">
               <a href="mailto:hello@unsignedpathway.co.uk?subject=UP%20Festival%20updates">
-                Keep me updated <span aria-hidden="true">&#8599;</span>
+                Keep me updated
               </a>
               <p>Sign up for news, artist announcements and more.</p>
             </div>
@@ -102,8 +102,7 @@ export default function UpFestivalPage() {
         <nav className={styles.linkRail} aria-label="Festival links">
           {festivalLinks.map((link) => (
             <Link href={link.href} key={link.href}>
-              <strong>{link.label}</strong>
-              <span className={styles.linkArrow} aria-hidden="true">&#8599;</span>
+              <strong><ScrambleLabel>{link.label}</ScrambleLabel></strong>
             </Link>
           ))}
         </nav>

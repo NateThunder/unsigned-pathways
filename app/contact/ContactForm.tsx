@@ -45,8 +45,7 @@ export function ContactForm() {
           </span>
         </label>
         <button className={styles.submitButton} type="submit" disabled>
-          <span>Send enquiry</span>
-          <span aria-hidden="true">↗</span>
+          Send enquiry
         </button>
       </form>
     </div>

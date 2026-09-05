@@ -1,5 +1,6 @@
 "use client";
 
+import { ScrambleLabel } from "../../components/ScrambleLabel";
 import { FormEvent } from "react";
 import styles from "./page.module.css";
 
@@ -40,9 +41,9 @@ export function EnquiryForm() {
         <textarea name="message" rows={4} required />
       </label>
       <div className={styles.formActions}>
-        <button type="submit">Send enquiry <span aria-hidden="true">&#8599;</span></button>
+        <button type="submit">Send enquiry</button>
         <a href="mailto:hello@unsignedpathway.com?subject=Access%20programme%20mailing%20list">
-          Join the mailing list <span aria-hidden="true">&#8599;</span>
+          <ScrambleLabel>Join the mailing list</ScrambleLabel>
         </a>
       </div>
     </form>

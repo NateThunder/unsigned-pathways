@@ -29,6 +29,28 @@
   align-self: center;
 }
 
+/* Blend each foreground group once against the page and rotating stage. */
+.intro,
+.details,
+.footer {
+  --ink: #fff;
+  /* Difference against #f3f1ed renders the brand blue #0759c9. */
+  --blue: #ec9824;
+  position: relative;
+  z-index: 3;
+  color: var(--ink);
+  mix-blend-mode: difference;
+}
+
+.intro,
+.details {
+  pointer-events: none;
+}
+
+.details a {
+  pointer-events: auto;
+}
+
 .festivalHeading {
   position: relative;
   top: clamp(-6rem, -6vw, -4.5rem);
@@ -43,17 +65,9 @@
   letter-spacing: -0.065em;
   line-height: 0.91;
   color: #fff;
-  mix-blend-mode: difference;
   white-space: nowrap;
   text-transform: uppercase;
   animation: intro-in 760ms 80ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.festivalHeading span {
-  width: 0.55rem;
-  height: 0.55rem;
-  flex: 0 0 auto;
-  background: var(--blue);
 }
 
 .summary {
@@ -257,11 +271,14 @@
 }
 
 .linkRail a {
+  /* Compensate for the rail's #0b0b0a backdrop instead of the paper. */
+  --blue: #1264d3;
   position: relative;
   display: grid;
   min-width: 0;
   padding: 1.35rem 2rem 1.35rem 0;
-  color: inherit;
+  color: #fff;
+  mix-blend-mode: difference;
   text-decoration: none;
   grid-template-columns: 1fr auto;
   column-gap: 1rem;
@@ -333,12 +350,26 @@
   gap: 0.55rem;
 }
 
+.socials a:hover,
+.socials a:focus-visible {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: var(--paper);
+}
+
+.socials a:focus-visible {
+  outline: 1px solid var(--blue);
+  outline-offset: 3px;
+}
+
 .corner {
+  --ink: #fff;
   position: fixed;
   z-index: 11;
   width: 1.5rem;
   height: 1.5rem;
   pointer-events: none;
+  mix-blend-mode: difference;
 }
 
 .cornerTopLeft {
@@ -600,8 +631,4 @@
     font-size: clamp(2.5rem, 11.75vw, 4.8rem);
   }
 
-  .festivalHeading span {
-    width: clamp(0.4rem, 1.7vw, 0.55rem);
-    height: clamp(0.4rem, 1.7vw, 0.55rem);
-  }
 }
