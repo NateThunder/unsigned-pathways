@@ -1,3 +1,4 @@
+import { ScrambleLabel } from "./ScrambleLabel";
 import { IBM_Plex_Mono } from "next/font/google";
 import { SocialLinks } from "./SocialLinks";
 import styles from "./footer.module.css";
@@ -41,7 +42,6 @@ export function Footer() {
             />
             <button className={styles.button} type="submit">
               <span>Sign up</span>
-              <span className={styles.arrow} aria-hidden="true">&rarr;</span>
             </button>
           </div>
           <label className={styles.consent}>
@@ -82,7 +82,7 @@ export function Footer() {
         <div className={styles.utilityActions}>
           <SocialLinks />
           <a className={styles.backToTop} href="#home">
-            Back to top <span aria-hidden="true">&uarr;</span>
+            <ScrambleLabel>Back to top</ScrambleLabel>
           </a>
         </div>
       </div>

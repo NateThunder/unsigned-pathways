@@ -1,3 +1,4 @@
+import { ScrambleLabel } from "../../components/ScrambleLabel";
 import type { Metadata } from "next";
 import { Footer } from "../../components/Footer";
 import styles from "../information.module.css";
@@ -21,9 +22,9 @@ export default function ContactPage() {
               The form is best for a structured enquiry. You can also email us directly or follow current activity on social media.
             </p>
             <div className={styles.contactLinks}>
-              <a href="mailto:hello@unsignedpathway.com">hello@unsignedpathway.com</a>
-              <a href="https://www.instagram.com/unsignedpathway" target="_blank" rel="noreferrer">Instagram @unsignedpathway</a>
-              <a href="https://www.tiktok.com/@unsignedpathway" target="_blank" rel="noreferrer">TikTok @unsignedpathway</a>
+              <a href="mailto:hello@unsignedpathway.com"><ScrambleLabel>hello@unsignedpathway.com</ScrambleLabel></a>
+              <a href="https://www.instagram.com/unsignedpathway" target="_blank" rel="noreferrer"><ScrambleLabel>Instagram @unsignedpathway</ScrambleLabel></a>
+              <a href="https://www.tiktok.com/@unsignedpathway" target="_blank" rel="noreferrer"><ScrambleLabel>TikTok @unsignedpathway</ScrambleLabel></a>
             </div>
           </div>
           <ContactForm />

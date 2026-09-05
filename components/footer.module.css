@@ -243,11 +243,6 @@
   transition: color 180ms ease;
 }
 
-.backToTop span {
-  display: inline-block;
-  margin-left: 0.45rem;
-  transition: transform 180ms ease;
-}
 
 .backToTop:hover,
 .backToTop:focus-visible {
@@ -255,10 +250,6 @@
   outline: none;
 }
 
-.backToTop:hover span,
-.backToTop:focus-visible span {
-  transform: translateY(-0.15rem);
-}
 
 .utilityActions {
   display: flex;

@@ -21,7 +21,6 @@ export function HomeCta() {
         {actions.map((action) => (
           <Link className={styles.action} href={action.href} key={action.href}>
             <span>{action.label}</span>
-            <span className={styles.arrow} aria-hidden="true">&#8599;</span>
           </Link>
         ))}
       </div>
