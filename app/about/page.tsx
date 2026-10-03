@@ -223,7 +223,7 @@ export default function AboutPage() {
         <section className={`${styles.section} ${styles.founder}`} aria-labelledby="founder-title">
           <div className={styles.founderPortrait}>
             <Image
-              src="/photos/fifi.jpg"
+              src="/photos/fifi.png"
               alt="Fifidiny Greasley, founder of Unsigned Pathway"
               fill
               sizes="(max-width: 800px) 100vw, 45vw"
