@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Caveat, Cormorant_Garamond, IBM_Plex_Mono, Inter } from "next/font/google";
+import { Footer } from "../components/Footer";
 import { SiteHeader } from "../components/SiteHeader";
 import "./globals.css";
 
@@ -35,8 +36,12 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body className={`${inter.variable} ${bodyMono.variable} ${editorial.variable} ${script.variable}`}>
-        <SiteHeader />
-        {children}
+        <div className="site-shell">
+          <SiteHeader />
+          {children}
+          <Footer />
+          <div className="site-noise" aria-hidden="true" />
+        </div>
       </body>
     </html>
   );

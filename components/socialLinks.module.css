@@ -30,15 +30,15 @@
   stroke: none;
 }
 
-.links a:hover,
-.links a:focus-visible {
-  border-color: #0759c9;
+.links.links a:hover,
+.links.links a:focus-visible {
+  border-color: #0b0b0a;
   background: #0759c9;
-  color: #f4f3ee;
+  color: #0b0b0a;
   outline: none;
 }
 
-.links a:focus-visible {
+.links.links a:focus-visible {
   outline: 1px solid #0759c9;
   outline-offset: 3px;
 }

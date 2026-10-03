@@ -1,7 +1,6 @@
 import { ScrambleLabel } from "../../components/ScrambleLabel";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SocialLinks } from "../../components/SocialLinks";
 import { EditorialModelScene } from "../../components/three/EditorialModelScene";
 import styles from "./page.module.css";
 
@@ -108,21 +107,10 @@ export default function UpFestivalPage() {
         </nav>
       </main>
 
-      <footer className={styles.footer}>
-        <p>&copy; 2026 Unsigned Pathway C.I.C.</p>
-        <nav aria-label="Legal links">
-          <a href="#privacy">Privacy</a>
-          <a href="#terms">Terms</a>
-          <a href="mailto:hello@unsignedpathway.co.uk">Contact</a>
-        </nav>
-        <SocialLinks className={styles.socials} />
-      </footer>
-
       <span className={`${styles.corner} ${styles.cornerTopLeft}`} aria-hidden="true" />
       <span className={`${styles.corner} ${styles.cornerTopRight}`} aria-hidden="true" />
       <span className={`${styles.corner} ${styles.cornerBottomLeft}`} aria-hidden="true" />
       <span className={`${styles.corner} ${styles.cornerBottomRight}`} aria-hidden="true" />
-      <div className={styles.noise} aria-hidden="true" />
     </div>
   );
 }

@@ -62,8 +62,6 @@ export function Footer() {
             Registered in Scotland
             <br />
             No: SC887043
-            <br />
-            <a href="mailto:hello@unsignedpathway.com">hello@unsignedpathway.com</a>
           </p>
         </section>
 
@@ -74,12 +72,23 @@ export function Footer() {
             <br className={styles.desktopBreak} /> young people across Scotland &amp; UK.
           </p>
         </section>
+
+        <div className={`${styles.companyBlock} ${styles.emailBlock}`}>
+          <a href="mailto:hello@unsignedpathway.com">hello@unsignedpathway.com</a>
+        </div>
+
+        <div className={`${styles.companyBlock} ${styles.desktopActions}`}>
+          <SocialLinks />
+          <a className={styles.backToTop} href="#home">
+            <ScrambleLabel>Back to top</ScrambleLabel>
+          </a>
+        </div>
       </div>
 
       <div className={styles.utilityBar}>
         <p>&copy; 2026 Unsigned Pathway</p>
         <p>SC887043</p>
-        <div className={styles.utilityActions}>
+        <div className={styles.mobileActions}>
           <SocialLinks />
           <a className={styles.backToTop} href="#home">
             <ScrambleLabel>Back to top</ScrambleLabel>

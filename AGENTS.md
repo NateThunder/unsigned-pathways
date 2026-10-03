@@ -34,3 +34,11 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Preserve generous whitespace, crisp one-pixel rules, square blue accents, minimal decoration, and subtle monochrome grain where it already appears.
 - Use CSS Modules for component-scoped styles and reuse established treatments before introducing new typography or colour values.
 - Primary CTA links and buttons use the Access page's "Enquire about access" treatment: square corners, a transparent/off-white background, a crisp `1px` near-black border, near-black uppercase mono text, and a northeast arrow (`↗`) aligned at the far edge. On hover and keyboard focus, invert to blue with off-white text and move the arrow slightly up and right; keep a clearly visible focus treatment and disable movement when reduced motion is requested.
+
+# 3D assets
+
+- New 3D assets must use the established editorial treatment in `components/three/EditorialModelScene.tsx`: blue `#0759c9` toon materials with near-black `#0b0b0a` outlines, consistent lighting, and transparent canvas backgrounds. Do not preserve a source model's materials or introduce a one-off colour treatment unless the design explicitly requires an exception.
+- Match the motion language of existing scenes. Use restrained rotation and pointer interaction, prefer slow yaw-only movement for upright product or instrument models, and always respect `prefers-reduced-motion` through the shared scene component.
+- Optimize every production GLB before referencing it. Prefer a clearly named `_optimized.glb` file, apply mesh simplification and Meshopt compression where appropriate, and verify that the reduced asset retains an acceptable silhouette at its rendered size.
+- Place 3D canvases inside responsive, overflow-safe wrappers, preserve vertical page scrolling on touch devices, and provide an accessible label on the containing element when the model communicates meaningful content.
+- When increasing a model's displayed size, increase its containing canvas or border area proportionally as part of the same change. Do not enlarge only the model scale or `targetSize`, because that can push the geometry beyond the camera framing and crop it.

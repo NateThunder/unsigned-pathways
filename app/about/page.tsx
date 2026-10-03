@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { IBM_Plex_Mono } from "next/font/google";
-import { Footer } from "../../components/Footer";
 import { PathwayChain } from "../../components/about/PathwayChain";
 import { AboutHeroScene } from "./AboutHeroScene";
 import { CommunityGuitarScene } from "./CommunityGuitarScene";
@@ -340,8 +339,6 @@ export default function AboutPage() {
         </section>
       </main>
 
-      <Footer />
-      <div className={styles.noise} aria-hidden="true" />
     </div>
   );
 }

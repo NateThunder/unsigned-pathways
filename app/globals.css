@@ -39,6 +39,34 @@ body {
   font-family: var(--font-display), Arial, Helvetica, sans-serif;
 }
 
+.site-shell {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.site-noise {
+  position: absolute;
+  z-index: 1000;
+  inset: -50%;
+  background-image: url("/textures/noise.webp");
+  background-repeat: repeat;
+  background-size: 160px 160px;
+  filter: contrast(175%);
+  opacity: 0.055;
+  pointer-events: none;
+  animation: site-grain-shift 240ms steps(2, jump-none) infinite;
+  will-change: transform;
+}
+
+@keyframes site-grain-shift {
+  0% { transform: translate3d(-3%, -2%, 0); }
+  25% { transform: translate3d(2%, 3%, 0); }
+  50% { transform: translate3d(3%, -3%, 0); }
+  75% { transform: translate3d(-2%, 2%, 0); }
+  100% { transform: translate3d(-3%, -2%, 0); }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -46,6 +74,10 @@ html {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .site-noise {
+    animation: none;
   }
 }
 

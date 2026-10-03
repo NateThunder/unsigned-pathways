@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Footer } from "../../components/Footer";
 import styles from "../information.module.css";
 
 export const metadata: Metadata = {
@@ -85,8 +84,6 @@ export default function FaqPage() {
           </div>
         </section>
       </main>
-      <Footer />
-      <div className={styles.noise} aria-hidden="true" />
     </div>
   );
 }

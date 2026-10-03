@@ -1,7 +1,6 @@
 import { ScrambleLabel } from "../../components/ScrambleLabel";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Footer } from "../../components/Footer";
 import { EditorialModelScene } from "../../components/three/EditorialModelScene";
 import styles from "./page.module.css";
 
@@ -218,8 +217,6 @@ export default function ArtistsPage() {
         </section>
       </main>
 
-      <Footer />
-      <div className={styles.noise} aria-hidden="true" />
     </div>
   );
 }
