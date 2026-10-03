@@ -520,6 +520,28 @@
   text-transform: uppercase;
 }
 
+.outcomesGuitar {
+  position: relative;
+  min-width: 0;
+  height: clamp(27.6rem, 40.8vw, 40.8rem);
+  margin-top: clamp(1.5rem, 3vw, 3rem);
+  overflow: hidden;
+}
+
+.outcomesGuitarCanvas {
+  position: absolute;
+  inset: 0;
+}
+
+.outcomesGuitarCanvas canvas {
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.outcomesGuitarCanvas canvas:active {
+  cursor: grabbing;
+}
+
 .delivery {
   display: grid;
   grid-template-columns: minmax(17rem, 0.42fr) minmax(28rem, 0.58fr);
@@ -534,6 +556,28 @@
   letter-spacing: -0.065em;
   line-height: 0.91;
   text-transform: uppercase;
+}
+
+.deliveryDecks {
+  position: relative;
+  min-width: 0;
+  height: clamp(22rem, 32vw, 32rem);
+  margin-top: clamp(1.5rem, 3vw, 3rem);
+  overflow: hidden;
+}
+
+.deliveryDecksCanvas {
+  position: absolute;
+  inset: 0;
+}
+
+.deliveryDecksCanvas canvas {
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.deliveryDecksCanvas canvas:active {
+  cursor: grabbing;
 }
 
 .settingGrid {
@@ -889,6 +933,19 @@
 
   .themeOutcomes {
     grid-column: 1;
+  }
+
+  .outcomesGuitar {
+    width: 100%;
+    height: clamp(25.2rem, 100.8vw, 37.2rem);
+    margin-top: 1.5rem;
+    grid-column: 1;
+  }
+
+  .deliveryDecks {
+    width: 100%;
+    height: clamp(22rem, 88vw, 32rem);
+    margin-top: 1.5rem;
   }
 
   .setting {

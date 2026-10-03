@@ -61,7 +61,6 @@ export function MobileNavigation() {
         id="mobile-menu"
         aria-hidden={!isOpen}
       >
-        <div className={styles.mobileMenuGrain} aria-hidden="true" />
         <nav aria-label="Mobile navigation">
           {links.map(([label, href]) => (
             <Link key={href} href={href} onClick={closeMenu} tabIndex={isOpen ? 0 : -1}>

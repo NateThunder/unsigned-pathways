@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Footer } from "../../components/Footer";
 import { PartnershipForm } from "./PartnershipForm";
 import styles from "./page.module.css";
 
@@ -130,8 +129,6 @@ export default function PartnershipPage() {
         </section>
       </main>
 
-      <Footer />
-      <div className={styles.noise} aria-hidden="true" />
     </div>
   );
 }

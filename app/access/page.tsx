@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Footer } from "../../components/Footer";
 import { EditorialModelScene } from "../../components/three/EditorialModelScene";
 import { EnquiryForm } from "./EnquiryForm";
 import { ProgrammeExplorer } from "./ProgrammeExplorer";
@@ -145,6 +144,20 @@ export default function AccessPage() {
         <section className={styles.themes} aria-labelledby="themes-title">
           <div className={styles.themesHeading}>
             <h2 id="themes-title">Outcomes</h2>
+            <div className={styles.outcomesGuitar} aria-label="Three-dimensional electric guitar">
+              <EditorialModelScene
+                autoRotate
+                autoRotateSpeed={0.1}
+                className={styles.outcomesGuitarCanvas}
+                dragToSpin
+                edgeThreshold={70}
+                modelPath="/3d/Meshy_AI_tele_guitar_black_3d_0829042310_optimized.glb"
+                rotation={[0, 0, 0]}
+                showEdges
+                targetSize={3.6}
+                yawOnly
+              />
+            </div>
           </div>
           <ul className={styles.themeOutcomes}>
             {outcomes.map((outcome, index) => (
@@ -159,6 +172,20 @@ export default function AccessPage() {
         <section className={styles.delivery} aria-labelledby="delivery-title">
           <div className={styles.deliveryHeading}>
             <h2 id="delivery-title">Who it&apos;s<br />for.</h2>
+            <div className={styles.deliveryDecks} aria-label="Three-dimensional DJ decks">
+              <EditorialModelScene
+                autoRotate
+                autoRotateAxis="x"
+                autoRotateSpeed={0.1}
+                className={styles.deliveryDecksCanvas}
+                dragToSpin
+                modelPath="/3d/decks_optimized.glb"
+                rotation={[0, 0, 0]}
+                showEdges
+                targetSize={3.6}
+                yawOnly
+              />
+            </div>
           </div>
           <ol className={styles.settingGrid}>
             {settings.map((setting) => (
@@ -192,8 +219,6 @@ export default function AccessPage() {
         </section>
       </main>
 
-      <Footer />
-      <div className={styles.noise} aria-hidden="true" />
     </div>
   );
 }

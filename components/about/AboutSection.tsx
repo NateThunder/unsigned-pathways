@@ -111,7 +111,6 @@ export function AboutSection() {
       <span className={`${styles.corner} ${styles.topRight}`} aria-hidden="true" />
       <span className={`${styles.corner} ${styles.bottomLeft}`} aria-hidden="true" />
       <span className={`${styles.corner} ${styles.bottomRight}`} aria-hidden="true" />
-      <div className={styles.visualNoise} aria-hidden="true" />
     </section>
   );
 }
