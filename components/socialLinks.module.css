@@ -32,9 +32,9 @@
 
 .links.links a:hover,
 .links.links a:focus-visible {
-  border-color: #0b0b0a;
+  border-color: #0759c9;
   background: #0759c9;
-  color: #0b0b0a;
+  color: #f4f3ee;
   outline: none;
 }
 
