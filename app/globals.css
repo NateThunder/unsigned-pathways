@@ -48,15 +48,25 @@ body {
 .site-noise {
   position: absolute;
   z-index: 1000;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.site-noise__texture {
+  position: absolute;
   inset: -50%;
   background-image: url("/textures/noise.webp");
   background-repeat: repeat;
   background-size: 160px 160px;
   filter: contrast(175%);
   opacity: 0.055;
-  pointer-events: none;
   animation: site-grain-shift 240ms steps(2, jump-none) infinite;
   will-change: transform;
+}
+
+.site-shell:has(.noise-free-hero) > .site-noise {
+  top: 100svh;
 }
 
 @keyframes site-grain-shift {
@@ -76,7 +86,7 @@ html {
     scroll-behavior: auto;
   }
 
-  .site-noise {
+  .site-noise__texture {
     animation: none;
   }
 }

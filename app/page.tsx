@@ -5,7 +5,7 @@ import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <div className={styles.homePage}>
+    <div className={`${styles.homePage} noise-free-hero`}>
       <main>
         <section className={styles.hero} id="home" aria-label="Unsigned Pathways">
           <video

@@ -18,6 +18,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Noise / film-grain treatment
 
+- The homepage banner hero video is the sole exception to the global noise treatment: keep the video and its shade free of the site-wide grain overlay. Begin the global grain immediately after that hero; do not remove it from later homepage sections or from other pages.
 - The homepage grain is a repeated raster texture, not generated CSS noise: reuse `public/textures/noise.webp` via `url("/textures/noise.webp")`.
 - Follow `components/benefits/benefits.module.css` or `components/homeCta.module.css`: make the section `position: relative`, `isolation: isolate`, and `overflow: hidden`, then place the grain in an absolutely positioned pseudo-element or decorative child with `inset: -50%`, `pointer-events: none`, and no semantic content (`aria-hidden="true"` for a child element).
 - Use `background-repeat: repeat`, `background-size: 160px 160px`, `filter: contrast(175%)`, and `opacity: 0.055`. Preserve these values as the default site-wide treatment unless the underlying image requires a deliberately documented adjustment.

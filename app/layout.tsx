@@ -40,7 +40,9 @@ export default function RootLayout({
           <SiteHeader />
           {children}
           <Footer />
-          <div className="site-noise" aria-hidden="true" />
+          <div className="site-noise" aria-hidden="true">
+            <div className="site-noise__texture" />
+          </div>
         </div>
       </body>
     </html>
