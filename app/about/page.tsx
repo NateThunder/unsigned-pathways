@@ -11,7 +11,7 @@ import styles from "./page.module.css";
 
 const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "700"],
   display: "swap",
   variable: "--font-about-mono",
 });
@@ -234,6 +234,15 @@ export default function AboutPage() {
             <h2 id="founder-title">Our Founder</h2>
             <p className={styles.founderName}>Fifidiny Greasley</p>
             <div className={styles.founderBody}>
+              <figure className={styles.founderPortraitMobile} aria-hidden="true">
+                <Image
+                  src="/photos/fifi.png"
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 54vw, 1px"
+                  className={styles.founderImage}
+                />
+              </figure>
               <p>
                 Unsigned Pathway was founded by Fifidiny Greasley, an independent artist,
                 creative practitioner and youth support professional with over 10 years&rsquo;

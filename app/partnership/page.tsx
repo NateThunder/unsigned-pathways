@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { OpportunitySymbol } from "./OpportunitySymbol";
 import { PartnershipForm } from "./PartnershipForm";
 import styles from "./page.module.css";
 
@@ -63,15 +64,6 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function OpportunityIcon({ type }: { type: (typeof opportunities)[number]["icon"] }) {
-  return (
-    <span className={`${styles.opportunityIcon} ${styles[type]}`} aria-hidden="true">
-      <i />
-      <i />
-    </span>
-  );
-}
-
 export default function PartnershipPage() {
   return (
     <div className={styles.page}>
@@ -108,7 +100,7 @@ export default function PartnershipPage() {
                 style={{ "--index": index } as React.CSSProperties}
                 key={opportunity.title}
               >
-                <OpportunityIcon type={opportunity.icon} />
+                <OpportunitySymbol index={index} type={opportunity.icon} />
                 <h3>{opportunity.title}</h3>
                 <p>{opportunity.body}</p>
               </article>

@@ -171,7 +171,7 @@ export default function AccessPage() {
 
         <section className={styles.delivery} aria-labelledby="delivery-title">
           <div className={styles.deliveryHeading}>
-            <h2 id="delivery-title">Who it&apos;s<br />for.</h2>
+            <h2 id="delivery-title"><span>Who it&apos;s</span> <span>for?</span></h2>
             <div className={styles.deliveryDecks} aria-label="Three-dimensional DJ decks">
               <EditorialModelScene
                 autoRotate
@@ -180,6 +180,7 @@ export default function AccessPage() {
                 className={styles.deliveryDecksCanvas}
                 dragToSpin
                 modelPath="/3d/decks_optimized.glb"
+                mobileTargetSize={1.8}
                 rotation={[0, 0, 0]}
                 showEdges
                 targetSize={3.6}

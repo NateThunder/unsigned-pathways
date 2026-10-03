@@ -19,6 +19,7 @@ type EditorialModelSceneProps = {
   preserveMaterials?: boolean;
   rotation?: [number, number, number];
   showEdges?: boolean;
+  mobileTargetSize?: number;
   targetSize?: number;
   yawOnly?: boolean;
 };
@@ -311,10 +312,12 @@ export function EditorialModelScene({
   preserveMaterials = false,
   rotation = [-0.18, -0.35, 0.06],
   showEdges = false,
+  mobileTargetSize,
   targetSize = 4.6,
   yawOnly = false,
 }: EditorialModelSceneProps) {
   const [motionAllowed, setMotionAllowed] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const { containerRef, shouldMount, isActive } = useSceneVisibility("200px 0px");
 
   useEffect(() => {
@@ -325,6 +328,19 @@ export function EditorialModelScene({
     preference.addEventListener("change", updatePreference);
     return () => preference.removeEventListener("change", updatePreference);
   }, []);
+
+  useEffect(() => {
+    const mobileViewport = window.matchMedia("(max-width: 800px)");
+    const updateViewport = () => setIsMobile(mobileViewport.matches);
+
+    updateViewport();
+    mobileViewport.addEventListener("change", updateViewport);
+    return () => mobileViewport.removeEventListener("change", updateViewport);
+  }, []);
+
+  const responsiveTargetSize = isMobile && mobileTargetSize
+    ? mobileTargetSize
+    : targetSize;
 
   return (
     <div className={className} ref={containerRef} style={{ width: "100%", height: "100%" }}>
@@ -357,7 +373,7 @@ export function EditorialModelScene({
               preserveMaterials={preserveMaterials}
               rotation={rotation}
               showEdges={showEdges}
-              targetSize={targetSize}
+              targetSize={responsiveTargetSize}
               yawOnly={yawOnly}
             />
           </Suspense>
