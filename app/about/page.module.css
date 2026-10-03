@@ -301,6 +301,10 @@
   object-position: center;
 }
 
+.founderPortraitMobile {
+  display: none;
+}
+
 .founderCopy {
   display: flex;
   padding: 0 clamp(4rem, 7.5vw, 9rem);
@@ -897,16 +901,45 @@
   }
 
   .founderCopy {
-    padding-top: 4.5rem;
+    padding-top: 3.5rem;
     padding-bottom: 5rem;
+  }
+
+  .founder > .founderPortrait {
+    display: none;
+  }
+
+  .founderPortraitMobile {
+    position: relative;
+    display: block;
+    float: right;
+    width: 54%;
+    aspect-ratio: 620 / 930;
+    margin: 0.2rem 0 1rem 1rem;
+    overflow: hidden;
+    background: var(--paper);
+    border: 1px solid var(--ink);
   }
 
   .founderCopy h2 {
     font-size: clamp(3rem, 14.5vw, 4.8rem);
   }
 
+  .founderName {
+    font-weight: 700;
+  }
+
   .founderBody {
     font-size: 0.82rem;
+    hyphens: auto;
+    text-align: justify;
+    text-align-last: left;
+  }
+
+  .founderBody::after {
+    display: block;
+    clear: both;
+    content: "";
   }
 
 }
