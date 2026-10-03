@@ -31,8 +31,7 @@
 
 /* Blend each foreground group once against the page and rotating stage. */
 .intro,
-.details,
-.footer {
+.details {
   --ink: #fff;
   /* Difference against #f3f1ed renders the brand blue #0759c9. */
   --blue: #ec9824;
@@ -255,21 +254,6 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.linkRail::before {
-  position: absolute;
-  inset: -50%;
-  z-index: -1;
-  background-image: url("/textures/noise.webp");
-  background-repeat: repeat;
-  background-size: 160px 160px;
-  filter: contrast(175%);
-  opacity: 0.055;
-  pointer-events: none;
-  animation: grain-shift 240ms steps(2, jump-none) infinite;
-  will-change: transform;
-  content: "";
-}
-
 .linkRail a {
   /* Compensate for the rail's #0b0b0a backdrop instead of the paper. */
   --blue: #1264d3;
@@ -312,42 +296,6 @@
 .linkRail a:focus-visible {
   outline: 1px solid var(--blue);
   outline-offset: 0.4rem;
-}
-
-.footer {
-  display: grid;
-  width: min(100% - clamp(3rem, 7vw, 7.5rem), 112rem);
-  margin: 0 auto;
-  padding: 1.15rem 0 1.7rem;
-  font-size: clamp(0.5rem, 0.56vw, 0.58rem);
-  text-transform: uppercase;
-  grid-template-columns: 1fr auto 1fr;
-}
-
-.footer p {
-  margin: 0;
-}
-
-.footer nav,
-.socials {
-  display: flex;
-  gap: clamp(1.5rem, 3vw, 3rem);
-}
-
-.footer a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.footer a:hover,
-.footer a:focus-visible {
-  color: var(--blue);
-  outline: none;
-}
-
-.socials {
-  justify-self: end;
-  gap: 0.55rem;
 }
 
 .socials a:hover,
@@ -482,8 +430,7 @@
 }
 
 @media (max-width: 620px) {
-  .main,
-  .footer {
+  .main {
     width: calc(100% - 2.5rem);
   }
 
@@ -539,21 +486,6 @@
     border-left: 0;
   }
 
-  .footer {
-    padding-block: 1.5rem 2.5rem;
-    grid-template-columns: 1fr auto;
-    row-gap: 1.25rem;
-  }
-
-  .footer nav {
-    justify-self: end;
-  }
-
-  .socials {
-    grid-column: 1 / -1;
-    justify-self: start;
-  }
-
   .corner {
     display: none;
   }
@@ -572,10 +504,6 @@
     transform: none;
   }
 
-  .linkRail::before {
-    animation: none;
-  }
-
   .updates a,
   .updates a span,
   .linkArrow {
@@ -583,8 +511,7 @@
   }
 }
 
-.main,
-.footer {
+.main {
   width: min(calc(100% - (2 * var(--up-page-gutter))), var(--up-content-max));
 }
 
@@ -619,8 +546,7 @@
 }
 
 @media (max-width: 620px) {
-  .main,
-  .footer {
+  .main {
     width: min(calc(100% - (2 * var(--up-page-gutter))), var(--up-content-max));
   }
 }

@@ -222,20 +222,6 @@
   pointer-events: none;
 }
 
-.visualNoise {
-  position: absolute;
-  inset: -50%;
-  z-index: 4;
-  pointer-events: none;
-  background-image: url("/textures/noise.webp");
-  background-repeat: repeat;
-  background-size: 160px 160px;
-  filter: contrast(175%);
-  opacity: 0.055;
-  animation: grain-shift 240ms steps(2, jump-none) infinite;
-  will-change: transform;
-}
-
 .topLeft {
   top: 2rem;
   left: 2rem;
@@ -291,32 +277,6 @@
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes grain-shift {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-
-  20% {
-    transform: translate3d(-2%, 3%, 0);
-  }
-
-  40% {
-    transform: translate3d(3%, -2%, 0);
-  }
-
-  60% {
-    transform: translate3d(-3%, 1%, 0);
-  }
-
-  80% {
-    transform: translate3d(2%, -3%, 0);
-  }
-
-  100% {
-    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -439,10 +399,6 @@
     opacity: 1;
     animation: none;
     transform: none;
-  }
-
-  .visualNoise {
-    animation: none;
   }
 
   .divider {

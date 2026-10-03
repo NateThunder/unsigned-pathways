@@ -9,25 +9,32 @@ import { useSceneVisibility } from "./useSceneVisibility";
 type EditorialModelSceneProps = {
   animate?: boolean;
   autoRotate?: boolean;
+  autoRotateAxis?: "x" | "y";
   autoRotateSpeed?: number;
   className?: string;
   dragToSpin?: boolean;
+  edgeThreshold?: number;
   modelPath: string;
   particles?: boolean;
   preserveMaterials?: boolean;
   rotation?: [number, number, number];
+  showEdges?: boolean;
+  mobileTargetSize?: number;
   targetSize?: number;
   yawOnly?: boolean;
 };
 
 type EditorialModelProps = {
   autoRotate: boolean;
+  autoRotateAxis: "x" | "y";
   autoRotateSpeed: number;
   dragToSpin: boolean;
+  edgeThreshold: number;
   modelPath: string;
   motionAllowed: boolean;
   preserveMaterials: boolean;
   rotation: [number, number, number];
+  showEdges: boolean;
   targetSize: number;
   yawOnly: boolean;
 };
@@ -107,19 +114,22 @@ function BackgroundParticles({ motionAllowed }: { motionAllowed: boolean }) {
 
 function EditorialModel({
   autoRotate,
+  autoRotateAxis,
   autoRotateSpeed,
   dragToSpin,
+  edgeThreshold,
   modelPath,
   motionAllowed,
   preserveMaterials,
   rotation,
+  showEdges,
   targetSize,
   yawOnly,
 }: EditorialModelProps) {
   const { scene } = useGLTF(modelPath);
   const { gl } = useThree();
   const group = useRef<THREE.Group>(null);
-  const yaw = useRef(rotation[1]);
+  const autoRotation = useRef(autoRotateAxis === "x" ? rotation[0] : rotation[1]);
   const spinBoost = useRef(0);
   const drag = useRef({ active: false, pointerId: -1, lastX: 0, lastTime: 0 });
 
@@ -162,16 +172,34 @@ function EditorialModel({
       outline.renderOrder = 0;
       object.add(outline);
 
+      if (showEdges) {
+        const edges = new THREE.LineSegments(
+          new THREE.EdgesGeometry(object.geometry, edgeThreshold),
+          new THREE.LineBasicMaterial({ color: "#0b0b0a" }),
+        );
+        edges.name = "editorial-edges";
+        edges.renderOrder = 2;
+        object.add(edges);
+      }
+
       object.castShadow = true;
       object.receiveShadow = true;
     });
 
     return { clone, scale };
-  }, [preserveMaterials, scene, targetSize]);
+  }, [edgeThreshold, preserveMaterials, scene, showEdges, targetSize]);
 
   useEffect(
     () => () => {
       model.clone.traverse((object) => {
+        if (object instanceof THREE.LineSegments && object.name === "editorial-edges") {
+          object.geometry.dispose();
+          const edgeMaterials = Array.isArray(object.material)
+            ? object.material
+            : [object.material];
+          edgeMaterials.forEach((material) => material.dispose());
+          return;
+        }
         if (!(object instanceof THREE.Mesh)) return;
         const materials = Array.isArray(object.material)
           ? object.material
@@ -205,7 +233,7 @@ function EditorialModel({
       const elapsed = Math.max((event.timeStamp - state.lastTime) / 1000, 1 / 120);
       const dragRotation = deltaX * 0.008;
 
-      yaw.current += dragRotation;
+      autoRotation.current += dragRotation;
       spinBoost.current = THREE.MathUtils.clamp(dragRotation / elapsed, -7, 7);
       state.lastX = event.clientX;
       state.lastTime = event.timeStamp;
@@ -244,14 +272,20 @@ function EditorialModel({
       : 0);
 
     if (motionAllowed && autoRotate) {
-      yaw.current += (autoRotateSpeed + spinBoost.current) * frameDelta;
+      autoRotation.current += (autoRotateSpeed + spinBoost.current) * frameDelta;
       spinBoost.current = THREE.MathUtils.damp(spinBoost.current, 0, 1.35, frameDelta);
-      object.rotation.y = yaw.current;
+      if (autoRotateAxis === "x") {
+        object.rotation.x = autoRotation.current;
+        object.rotation.y = THREE.MathUtils.damp(object.rotation.y, targetY, 4, frameDelta);
+      } else {
+        object.rotation.y = autoRotation.current;
+        object.rotation.x = THREE.MathUtils.damp(object.rotation.x, targetX, 4, frameDelta);
+      }
     } else {
       object.rotation.y = THREE.MathUtils.damp(object.rotation.y, targetY, 4, frameDelta);
+      object.rotation.x = THREE.MathUtils.damp(object.rotation.x, targetX, 4, frameDelta);
     }
 
-    object.rotation.x = THREE.MathUtils.damp(object.rotation.x, targetX, 4, frameDelta);
     object.rotation.z = THREE.MathUtils.damp(object.rotation.z, rotation[2], 4, frameDelta);
     object.position.y = motionAllowed && !yawOnly
       ? Math.sin(clock.elapsedTime * 0.68) * 0.055
@@ -268,17 +302,22 @@ function EditorialModel({
 export function EditorialModelScene({
   animate = true,
   autoRotate = false,
+  autoRotateAxis = "y",
   autoRotateSpeed = 0.12,
   className,
   dragToSpin = false,
+  edgeThreshold = 32,
   modelPath,
   particles = false,
   preserveMaterials = false,
   rotation = [-0.18, -0.35, 0.06],
+  showEdges = false,
+  mobileTargetSize,
   targetSize = 4.6,
   yawOnly = false,
 }: EditorialModelSceneProps) {
   const [motionAllowed, setMotionAllowed] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const { containerRef, shouldMount, isActive } = useSceneVisibility("200px 0px");
 
   useEffect(() => {
@@ -289,6 +328,19 @@ export function EditorialModelScene({
     preference.addEventListener("change", updatePreference);
     return () => preference.removeEventListener("change", updatePreference);
   }, []);
+
+  useEffect(() => {
+    const mobileViewport = window.matchMedia("(max-width: 800px)");
+    const updateViewport = () => setIsMobile(mobileViewport.matches);
+
+    updateViewport();
+    mobileViewport.addEventListener("change", updateViewport);
+    return () => mobileViewport.removeEventListener("change", updateViewport);
+  }, []);
+
+  const responsiveTargetSize = isMobile && mobileTargetSize
+    ? mobileTargetSize
+    : targetSize;
 
   return (
     <div className={className} ref={containerRef} style={{ width: "100%", height: "100%" }}>
@@ -312,13 +364,16 @@ export function EditorialModelScene({
           <Suspense fallback={null}>
             <EditorialModel
               autoRotate={autoRotate}
+              autoRotateAxis={autoRotateAxis}
               autoRotateSpeed={autoRotateSpeed}
               dragToSpin={dragToSpin}
+              edgeThreshold={edgeThreshold}
               modelPath={modelPath}
               motionAllowed={animate && motionAllowed}
               preserveMaterials={preserveMaterials}
               rotation={rotation}
-              targetSize={targetSize}
+              showEdges={showEdges}
+              targetSize={responsiveTargetSize}
               yawOnly={yawOnly}
             />
           </Suspense>

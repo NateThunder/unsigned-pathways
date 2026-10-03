@@ -1,6 +1,5 @@
 import { ScrambleLabel } from "../../components/ScrambleLabel";
 import type { Metadata } from "next";
-import { Footer } from "../../components/Footer";
 import styles from "../information.module.css";
 import { ContactForm } from "./ContactForm";
 
@@ -30,8 +29,6 @@ export default function ContactPage() {
           <ContactForm />
         </section>
       </main>
-      <Footer />
-      <div className={styles.noise} aria-hidden="true" />
     </div>
   );
 }

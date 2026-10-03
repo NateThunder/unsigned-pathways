@@ -462,7 +462,7 @@
   min-height: min(54rem, 88svh);
   grid-template-columns: minmax(17rem, 0.42fr) minmax(28rem, 0.58fr);
   gap: clamp(2rem, 5vw, 6rem);
-  align-items: center;
+  align-items: start;
 }
 
 .themeOutcomes {
@@ -493,17 +493,6 @@
 .themeOutcomes li:nth-child(3) { --outcome-index: 2; }
 .themeOutcomes li:nth-child(4) { --outcome-index: 3; }
 
-.themeOutcomes li::after {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  width: 0.58rem;
-  height: 0.58rem;
-  border: 1px solid var(--blue);
-  content: "";
-  transform: translateY(-50%);
-}
-
 .themeOutcomes span {
   color: var(--blue);
   font-size: var(--up-label);
@@ -520,6 +509,28 @@
   text-transform: uppercase;
 }
 
+.outcomesGuitar {
+  position: relative;
+  min-width: 0;
+  height: clamp(27.6rem, 40.8vw, 40.8rem);
+  margin-top: clamp(1.5rem, 3vw, 3rem);
+  overflow: hidden;
+}
+
+.outcomesGuitarCanvas {
+  position: absolute;
+  inset: 0;
+}
+
+.outcomesGuitarCanvas canvas {
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.outcomesGuitarCanvas canvas:active {
+  cursor: grabbing;
+}
+
 .delivery {
   display: grid;
   grid-template-columns: minmax(17rem, 0.42fr) minmax(28rem, 0.58fr);
@@ -534,6 +545,32 @@
   letter-spacing: -0.065em;
   line-height: 0.91;
   text-transform: uppercase;
+}
+
+.deliveryHeading h2 span {
+  display: block;
+}
+
+.deliveryDecks {
+  position: relative;
+  min-width: 0;
+  height: clamp(22rem, 32vw, 32rem);
+  margin-top: clamp(1.5rem, 3vw, 3rem);
+  overflow: hidden;
+}
+
+.deliveryDecksCanvas {
+  position: absolute;
+  inset: 0;
+}
+
+.deliveryDecksCanvas canvas {
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.deliveryDecksCanvas canvas:active {
+  cursor: grabbing;
 }
 
 .settingGrid {
@@ -887,17 +924,136 @@
     align-items: start;
   }
 
+  .themesHeading h2 {
+    transform: translateY(-0.75rem);
+  }
+
   .themeOutcomes {
+    position: relative;
+    border-top: 0;
     grid-column: 1;
   }
 
+  .themeOutcomes::before,
+  .themeOutcomes li::before {
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    height: 1px;
+    background: #ec9822;
+    content: "";
+    mix-blend-mode: difference;
+    pointer-events: none;
+  }
+
+  .themeOutcomes::before {
+    top: 0;
+  }
+
+  .themeOutcomes li {
+    border-bottom: 0;
+    opacity: 1;
+    animation: none;
+  }
+
+  .themeOutcomes li::before {
+    bottom: 0;
+  }
+
+  .themeOutcomes span,
+  .themeOutcomes p {
+    position: relative;
+    z-index: 2;
+  }
+
+  .outcomesGuitar {
+    position: absolute;
+    z-index: 0;
+    top: clamp(4.5rem, 18vw, 7rem);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    margin-top: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .deliveryDecks {
+    position: absolute;
+    z-index: 0;
+    top: clamp(6.5rem, 22vw, 9rem);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    margin-top: 0;
+    pointer-events: none;
+  }
+
+  .deliveryHeading h2 span {
+    display: inline;
+  }
+
+  .deliveryDecksCanvas {
+    top: 50%;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    height: clamp(22rem, 88vw, 32rem);
+    transform: translateY(-50%);
+  }
+
+  .settingGrid {
+    position: relative;
+    margin-top: 2.75rem;
+    border-top: 0;
+  }
+
+  .settingGrid::before,
+  .setting::before {
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    height: 1px;
+    background: #1163d2;
+    content: "";
+    mix-blend-mode: difference;
+    pointer-events: none;
+  }
+
+  .settingGrid::before {
+    top: 0;
+  }
+
   .setting {
+    position: relative;
     min-height: 5.5rem;
     padding: 1.1rem 0;
+    border-bottom: 0;
+    opacity: 1;
+    animation: none;
+  }
+
+  .setting::before {
+    bottom: 0;
+  }
+
+  .setting > p:first-child,
+  .setting h3,
+  .deliveryNote > p {
+    position: relative;
+    z-index: 2;
   }
 
   .setting > p:first-child {
     margin: 0;
+    color: #1163d2;
+    mix-blend-mode: difference;
   }
 
   .deliveryNote {

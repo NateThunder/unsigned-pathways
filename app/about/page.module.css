@@ -275,7 +275,9 @@
 
 .founder {
   display: grid;
+  box-sizing: border-box;
   min-height: min(58rem, 92svh);
+  padding-block: clamp(5rem, 8vw, 9rem);
   background: var(--paper);
   border-top: 1px solid var(--ink);
   grid-template-columns: minmax(20rem, 0.9fr) minmax(0, 1.1fr);
@@ -284,12 +286,10 @@
 .founderPortrait {
   position: relative;
   box-sizing: border-box;
-  width: 50%;
+  width: 65%;
   min-height: 0;
-  aspect-ratio: 620 / 930;
-  align-self: center;
+  align-self: stretch;
   justify-self: center;
-  margin-block: clamp(2rem, 4vw, 4rem);
   overflow: hidden;
   background: var(--paper);
   border: 1px solid var(--ink);
@@ -297,14 +297,17 @@
 
 .founderImage {
   display: block;
-  filter: grayscale(100%);
   object-fit: cover;
   object-position: center;
 }
 
+.founderPortraitMobile {
+  display: none;
+}
+
 .founderCopy {
   display: flex;
-  padding: clamp(5rem, 8vw, 9rem) clamp(4rem, 7.5vw, 9rem);
+  padding: 0 clamp(4rem, 7.5vw, 9rem);
   flex-direction: column;
   justify-content: center;
   opacity: 0;
@@ -335,7 +338,7 @@
 
 .founderBody {
   width: min(100%, 38rem);
-  margin-top: clamp(3rem, 6vw, 6rem);
+  margin-top: clamp(1.5rem, 2.5vw, 2.5rem);
   font-family: var(--font-about-mono), monospace;
   font-size: clamp(0.74rem, 0.85vw, 0.95rem);
   font-weight: 400;
@@ -418,7 +421,6 @@
 .teamImage {
   object-fit: cover;
   object-position: center;
-  filter: grayscale(1);
 }
 
 .teamMember:first-child .teamImage {
@@ -778,6 +780,19 @@
 
   .founder {
     grid-template-columns: minmax(0, 1fr);
+    padding-block: 0;
+  }
+
+  .founderPortrait {
+    width: 50%;
+    aspect-ratio: 620 / 930;
+    align-self: center;
+    margin-block: clamp(2rem, 4vw, 4rem);
+  }
+
+  .founderCopy {
+    padding-top: clamp(5rem, 8vw, 9rem);
+    padding-bottom: clamp(5rem, 8vw, 9rem);
   }
 
 }
@@ -886,16 +901,45 @@
   }
 
   .founderCopy {
-    padding-top: 4.5rem;
+    padding-top: 3.5rem;
     padding-bottom: 5rem;
+  }
+
+  .founder > .founderPortrait {
+    display: none;
+  }
+
+  .founderPortraitMobile {
+    position: relative;
+    display: block;
+    float: right;
+    width: 54%;
+    aspect-ratio: 620 / 930;
+    margin: 0.2rem 0 1rem 1rem;
+    overflow: hidden;
+    background: var(--paper);
+    border: 1px solid var(--ink);
   }
 
   .founderCopy h2 {
     font-size: clamp(3rem, 14.5vw, 4.8rem);
   }
 
+  .founderName {
+    font-weight: 700;
+  }
+
   .founderBody {
     font-size: 0.82rem;
+    hyphens: auto;
+    text-align: justify;
+    text-align-last: left;
+  }
+
+  .founderBody::after {
+    display: block;
+    clear: both;
+    content: "";
   }
 
 }

@@ -92,7 +92,6 @@ export function BenefitsSection() {
         <span>ACCESS: OPEN</span>
       </div>
 
-      <div className={styles.noise} aria-hidden="true" />
     </section>
   );
 }
