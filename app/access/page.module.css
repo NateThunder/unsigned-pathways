@@ -462,7 +462,7 @@
   min-height: min(54rem, 88svh);
   grid-template-columns: minmax(17rem, 0.42fr) minmax(28rem, 0.58fr);
   gap: clamp(2rem, 5vw, 6rem);
-  align-items: center;
+  align-items: start;
 }
 
 .themeOutcomes {

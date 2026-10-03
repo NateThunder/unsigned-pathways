@@ -236,21 +236,33 @@ export default function AboutPage() {
             <p className={styles.founderName}>Fifidiny Greasley</p>
             <div className={styles.founderBody}>
               <p>
-                Unsigned Pathway was founded by Fifidiny Greasley, an artist with over 10 years of
-                trauma-informed experience working with young people in residential
-                schools, care and community settings, including those with complex
-                behavioural needs.
+                Unsigned Pathway was founded by Fifidiny Greasley, an independent artist,
+                creative practitioner and youth support professional with over 10 years&rsquo;
+                experience supporting young people across residential, care and community
+                settings, including those with complex behavioural and support needs.
               </p>
               <p>
-                With a background in music and a Bachelor&apos;s degree in Popular Music,
-                the organisation is built on both professional experience and lived
-                understanding.
+                Alongside her professional music career, Fifidiny holds a BA (Hons) in Popular
+                Music and an SVQ Level 3 in Children and Young People. Her experience spans artist
+                development, live performance, creative engagement, safeguarding and
+                trauma-informed practice.
               </p>
               <p>
-                This combination of professional experience and lived understanding
-                allows Unsigned Pathway to connect with individuals in a way
-                traditional approaches often cannot — bridging the gap between lived
-                experience and real opportunity.
+                As a performing artist, Fifidiny has headlined The Queen&rsquo;s Hall Edinburgh,
+                performed at Celtic Connections and festivals across Scotland, and received
+                recognition from BBC Radio Scotland and BBC Introducing Scotland.
+              </p>
+              <p>
+                Having experienced first-hand the barriers that can prevent talented people from
+                accessing opportunities, Fifidiny created Unsigned Pathway to build something
+                different: clear, accessible pathways that turn creative potential into real
+                opportunity.
+              </p>
+              <p>
+                Her combined experience across music, youth support and lived experience shapes
+                the organisation&rsquo;s approach &mdash; ensuring the people it supports are not
+                simply given opportunities, but are understood, developed and supported to
+                progress.
               </p>
             </div>
           </div>
