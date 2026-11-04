@@ -2,6 +2,7 @@
 @import "@fontsource-variable/recursive/full.css";
 
 :root {
+  color-scheme: only light;
   --background: #ffffff;
   --foreground: #171717;
   --up-blue: #0759c9;
@@ -25,12 +26,14 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Dark mode is preserved for future use, but disabled.
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
 }
+*/
 
 body {
   margin: 0;
